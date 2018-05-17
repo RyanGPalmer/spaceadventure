@@ -1,0 +1,181 @@
+2018-05-15 15:44:47.658 - vicinityconcepts.game.SpaceAdventure - Game started.
+2018-05-15 15:44:50.132 - GameDataLoader - Data file not found. A new one will be created.
+2018-05-15 15:44:50.132 - vicinityconcepts.game.SpaceAdventure - Task started: GameDataLoader
+2018-05-15 15:44:51.163 - vicinityconcepts.game.SpaceAdventure - No seed was loaded. New seed generated.
+2018-05-15 15:44:51.248 - vicinityconcepts.game.SpaceAdventure - Task started: GalaxyGenerator
+2018-05-15 15:44:51.252 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 15:44:57.377 - GalaxyGenerator - Galaxy generation completed in 6.1 seconds.
+2018-05-15 15:44:57.377 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 15:44:57.381 - vicinityconcepts.game.SpaceAdventure - Loaded galaxy with 60202 planets.
+2018-05-15 15:45:01.782 - AWT-EventQueue-0 - Game ended.
+2018-05-15 15:45:01.793 - AWT-EventQueue-0 - Task started: GameDataSaver
+2018-05-15 15:45:01.801 - GameDataSaver - Game data saved. (0.01s)
+2018-05-15 16:24:54.311 - vicinityconcepts.game.SpaceAdventure - Game started.
+2018-05-15 16:24:57.365 - vicinityconcepts.game.SpaceAdventure - Task started: GameDataLoader
+2018-05-15 16:24:57.393 - GameDataLoader - Successfully loaded game data. (0.01s)
+2018-05-15 16:24:58.405 - vicinityconcepts.game.SpaceAdventure - Task started: GalaxyGenerator
+2018-05-15 16:24:58.407 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:25:04.879 - GalaxyGenerator - Galaxy generation completed in 6.47 seconds.
+2018-05-15 16:25:04.879 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:25:04.881 - vicinityconcepts.game.SpaceAdventure - Loaded galaxy with 60202 planets.
+2018-05-15 16:25:29.088 - vicinityconcepts.game.SpaceAdventure - Game started.
+2018-05-15 16:25:32.324 - vicinityconcepts.game.SpaceAdventure - Task started: GameDataLoader
+2018-05-15 16:25:32.350 - GameDataLoader - Successfully loaded game data. (0.01s)
+2018-05-15 16:25:33.363 - vicinityconcepts.game.SpaceAdventure - Task started: GalaxyGenerator
+2018-05-15 16:25:33.371 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:25:39.255 - GalaxyGenerator - Galaxy generation completed in 5.88 seconds.
+2018-05-15 16:25:39.255 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:25:39.257 - vicinityconcepts.game.SpaceAdventure - Loaded galaxy with 60202 planets.
+2018-05-15 16:28:19.071 - MainMenu - Game started.
+2018-05-15 16:28:22.188 - MainMenu - Task started: GameDataLoader
+2018-05-15 16:28:22.218 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 16:28:23.222 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 16:28:23.224 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:28:29.329 - GalaxyGenerator - Galaxy generation completed in 6.1 seconds.
+2018-05-15 16:28:29.329 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:28:29.331 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 16:28:47.885 - MainMenu - Game started.
+2018-05-15 16:28:50.758 - MainMenu - Task started: GameDataLoader
+2018-05-15 16:28:50.782 - GameDataLoader - Successfully loaded game data. (0.01s)
+2018-05-15 16:28:51.805 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 16:28:51.808 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:28:58.000 - GalaxyGenerator - Galaxy generation completed in 6.19 seconds.
+2018-05-15 16:28:58.000 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:28:58.002 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 16:28:58.114 - MainMenu - Game ended.
+2018-05-15 16:28:58.114 - MainMenu - Task started: GameDataSaver
+2018-05-15 16:28:58.116 - GameDataSaver - Game data saved. (0s)
+2018-05-15 16:30:13.973 - MainMenu - Task started: GameDataLoader
+2018-05-15 16:30:13.973 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 16:30:14.956 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 16:30:14.960 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:30:21.282 - GalaxyGenerator - Galaxy generation completed in 6.32 seconds.
+2018-05-15 16:30:21.282 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:30:21.286 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 16:30:21.399 - MainMenu - Game ended.
+2018-05-15 16:30:21.400 - MainMenu - Task started: GameDataSaver
+2018-05-15 16:30:21.402 - GameDataSaver - Game data saved. (0s)
+2018-05-15 16:31:31.465 - MainMenu - Task started: GameDataLoader
+2018-05-15 16:31:31.465 - GameDataLoader - Successfully loaded game data. (0.04s)
+2018-05-15 16:31:32.442 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 16:31:32.446 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:31:38.795 - GalaxyGenerator - Galaxy generation completed in 6.35 seconds.
+2018-05-15 16:31:38.796 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:31:38.799 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 16:31:38.910 - MainMenu - Game ended.
+2018-05-15 16:31:38.910 - MainMenu - Task started: GameDataSaver
+2018-05-15 16:31:38.912 - GameDataSaver - Game data saved. (0s)
+2018-05-15 16:32:44.378 - MainMenu - Task started: GameDataLoader
+2018-05-15 16:32:44.378 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 16:32:45.364 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 16:32:45.367 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:32:51.463 - GalaxyGenerator - Galaxy generation completed in 6.1 seconds.
+2018-05-15 16:32:51.464 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:32:51.467 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 16:32:51.583 - MainMenu - Game ended.
+2018-05-15 16:32:51.583 - MainMenu - Task started: GameDataSaver
+2018-05-15 16:32:51.585 - GameDataSaver - Game data saved. (0s)
+2018-05-15 16:41:14.259 - MainMenu - Task started: GameDataLoader
+2018-05-15 16:41:14.259 - GameDataLoader - Successfully loaded game data. (0.01s)
+2018-05-15 16:41:15.229 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 16:41:15.233 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:41:21.548 - GalaxyGenerator - Galaxy generation completed in 6.32 seconds.
+2018-05-15 16:41:21.549 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:41:21.552 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 16:41:21.649 - MainMenu - Game ended.
+2018-05-15 16:41:21.649 - MainMenu - Task started: GameDataSaver
+2018-05-15 16:41:21.651 - GameDataSaver - Game data saved. (0s)
+2018-05-15 16:54:16.942 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 16:54:16.942 - MainMenu - Task started: GameDataLoader
+2018-05-15 16:54:17.908 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 16:54:17.911 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:54:24.072 - GalaxyGenerator - Galaxy generation completed in 6.16 seconds.
+2018-05-15 16:54:24.073 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:54:24.075 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 16:54:24.193 - MainMenu - Game ended.
+2018-05-15 16:54:24.193 - MainMenu - Task started: GameDataSaver
+2018-05-15 16:54:24.194 - GameDataSaver - Game data saved. (0s)
+2018-05-15 16:56:43.344 - MainMenu - Task started: GameDataLoader
+2018-05-15 16:56:43.344 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 16:56:44.379 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 16:56:44.382 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 16:56:50.556 - GalaxyGenerator - Galaxy generation completed in 6.17 seconds.
+2018-05-15 16:56:50.556 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 16:56:50.559 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 16:56:50.725 - MainMenu - Game ended.
+2018-05-15 16:56:50.725 - MainMenu - Task started: GameDataSaver
+2018-05-15 16:56:50.726 - GameDataSaver - Game data saved. (0s)
+2018-05-15 17:06:44.470 - MainMenu - Task started: GameDataLoader
+2018-05-15 17:06:44.470 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 17:06:45.511 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 17:06:45.519 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 17:06:51.724 - GalaxyGenerator - Galaxy generation completed in 6.2 seconds.
+2018-05-15 17:06:51.724 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 17:06:51.727 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 17:06:51.841 - MainMenu - Game ended.
+2018-05-15 17:06:51.841 - MainMenu - Task started: GameDataSaver
+2018-05-15 17:06:51.843 - GameDataSaver - Game data saved. (0s)
+2018-05-15 17:07:28.904 - MainMenu - Task started: GameDataLoader
+2018-05-15 17:07:28.904 - GameDataLoader - Successfully loaded game data. (0.01s)
+2018-05-15 17:07:29.943 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 17:07:29.946 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 17:07:36.181 - GalaxyGenerator - Galaxy generation completed in 6.23 seconds.
+2018-05-15 17:07:36.181 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 17:07:36.184 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 17:07:36.292 - MainMenu - Game ended.
+2018-05-15 17:07:36.292 - MainMenu - Task started: GameDataSaver
+2018-05-15 17:07:36.294 - GameDataSaver - Game data saved. (0s)
+2018-05-15 17:07:48.354 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 17:07:48.352 - MainMenu - Task started: GameDataLoader
+2018-05-15 17:07:49.394 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 17:07:49.397 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 17:07:55.609 - GalaxyGenerator - Galaxy generation completed in 6.21 seconds.
+2018-05-15 17:07:55.609 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 17:07:55.612 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 17:07:55.730 - MainMenu - Game ended.
+2018-05-15 17:07:55.731 - MainMenu - Task started: GameDataSaver
+2018-05-15 17:07:55.733 - GameDataSaver - Game data saved. (0s)
+2018-05-15 17:08:06.427 - MainMenu - Task started: GameDataLoader
+2018-05-15 17:08:06.427 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 17:08:07.466 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 17:08:07.468 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 17:08:13.643 - GalaxyGenerator - Galaxy generation completed in 6.17 seconds.
+2018-05-15 17:08:13.643 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 17:08:13.646 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 17:08:13.777 - MainMenu - Game ended.
+2018-05-15 17:08:13.778 - MainMenu - Task started: GameDataSaver
+2018-05-15 17:08:13.779 - GameDataSaver - Game data saved. (0s)
+2018-05-15 17:09:01.924 - MainMenu - Task started: GameDataLoader
+2018-05-15 17:09:01.924 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 17:09:02.962 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 17:09:02.965 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 17:09:27.232 - MainMenu - Task started: GameDataLoader
+2018-05-15 17:09:27.232 - GameDataLoader - Successfully loaded game data. (0.02s)
+2018-05-15 17:09:28.271 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 17:09:28.274 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 17:09:34.440 - GalaxyGenerator - Galaxy generation completed in 6.16 seconds.
+2018-05-15 17:09:34.440 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 17:09:34.443 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 17:09:34.547 - MainMenu - Game ended.
+2018-05-15 17:09:34.547 - MainMenu - Task started: GameDataSaver
+2018-05-15 17:09:34.549 - GameDataSaver - Game data saved. (0s)
+2018-05-15 17:21:24.775 - MainMenu - Task started: GameDataLoader
+2018-05-15 17:21:24.775 - GameDataLoader - Successfully loaded game data. (0.01s)
+2018-05-15 17:21:25.789 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 17:21:25.791 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 17:21:31.763 - GalaxyGenerator - Galaxy generation completed in 5.97 seconds.
+2018-05-15 17:21:31.764 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 17:21:31.767 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 17:21:31.934 - MainMenu - Game ended.
+2018-05-15 17:21:31.935 - MainMenu - Task started: GameDataSaver
+2018-05-15 17:21:31.974 - GameDataSaver - Game data saved. (0.04s)
+2018-05-15 17:21:34.623 - MainMenu - Task started: GameDataLoader
+2018-05-15 17:21:34.624 - GameDataLoader - Successfully loaded game data. (0s)
+2018-05-15 17:21:35.630 - MainMenu - Task started: GalaxyGenerator
+2018-05-15 17:21:35.630 - GalaxyGenerator - Generating galaxy from seed: -7581081812702766357
+2018-05-15 17:21:41.687 - GalaxyGenerator - Galaxy generation completed in 6.06 seconds.
+2018-05-15 17:21:41.687 - GalaxyGenerator - Set current star system: KT-2577721-Alpha
+2018-05-15 17:21:41.688 - MainMenu - Loaded galaxy with 60202 planets.
+2018-05-15 17:21:41.700 - MainMenu - Game ended.
+2018-05-15 17:21:41.700 - MainMenu - Task started: GameDataSaver
+2018-05-15 17:21:41.700 - GameDataSaver - Game data saved. (0s)
