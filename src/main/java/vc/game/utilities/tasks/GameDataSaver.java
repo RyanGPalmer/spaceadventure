@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 import vc.engine.Log;
-import vc.game.utilities.Stopwatch;
+import vc.engine.util.Stopwatch;
 
 public class GameDataSaver extends Task<Boolean> {
 	private static final String DATA_FILE_NAME = "game.dat";

@@ -1,4 +1,4 @@
-package vc.game.utilities;
+package vc.engine.util;
 
 import java.text.DecimalFormat;
 

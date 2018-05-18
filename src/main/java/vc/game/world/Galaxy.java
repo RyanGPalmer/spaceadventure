@@ -1,7 +1,7 @@
 package vc.game.world;
 
 import vc.engine.Log;
-import vc.game.utilities.Stopwatch;
+import vc.engine.util.Stopwatch;
 
 public class Galaxy extends ProceduralObject {
 	private static final int MIN_DISTANCE_BETWEEN_STARS = 4;

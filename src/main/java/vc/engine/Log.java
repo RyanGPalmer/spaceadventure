@@ -37,14 +37,13 @@ public final class Log {
 
 	private static void runLogWorkerActivities() {
 		while (logWorkerActive) {
-			checkLogBufferAndWriteNewEntries();
 			try {
 				Thread.sleep(LOG_WRITE_INTERVAL);
 			} catch (InterruptedException e) {
-				Log.warn("Log worker interrupted while checking the buffer.");
+				Log.interrupt();
 			}
+			checkLogBufferAndWriteNewEntries();
 		}
-		checkLogBufferAndWriteNewEntries(); // Write any remaining log entries
 	}
 
 	private static void checkLogBufferAndWriteNewEntries() {

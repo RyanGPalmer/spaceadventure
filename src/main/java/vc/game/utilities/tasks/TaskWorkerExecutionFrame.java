@@ -1,7 +1,7 @@
 package vc.game.utilities.tasks;
 
 import vc.engine.Log;
-import vc.game.utilities.*;
+import vc.engine.util.Stopwatch;
 import vc.game.ux.Frame;
 
 public class TaskWorkerExecutionFrame extends Frame {

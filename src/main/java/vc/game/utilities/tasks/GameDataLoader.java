@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 
 import vc.engine.Log;
-import vc.game.utilities.Stopwatch;
+import vc.engine.util.Stopwatch;
 
 public class GameDataLoader extends Task<Long> {
 	private static final String DATA_FILE_NAME = "game.dat";
