@@ -7,32 +7,6 @@ Use the following instructions to get the project up and running in IntelliJ on 
 * JDK 9.0.4
 * Gradle 4.7
 
-# Set Up IntelliJ Project
-
-1. Open IntelliJ
-2. Select *Check out from Version Control*
-3. Select *Git* from the drop-down menu
-4. Enter the URL of the repo: *https://github.com/RyanGPalmer/spaceadventure*
-5. Choose an installation directory (Recommended: ~/IdeaProjects/SpaceAdventure)
-6. Click *Clone* and enter GitHub username and password if prompted
-7. Click *Yes* when it asks to create a project from the sources
-8. Choose *Import project from external model* and select *Gradle*
-9. Click *Next*
-10. Check *Use auto-import*
-11. For *Gradle home:* enter the path of your Gradle installation
-12. For *Gradle JVM:* choose *Use Project JDK*
-13. For *Project format:* choose *.ipr (file based)*
-14. Click *Finish*
-15. If you receive a *Gradle projects need to be imported* message, click *Import Changes*
-16. Allow Gradle to refresh the project.
-17. Go to *File > Project Structure*
-18. Under *Platform Settings > SDKs* click the ***+*** button and select *JDK* from the drop-down
-19. Browse to your JDK 9.0.4 folder *(Ex: /Library/Java/jdk-9.0.4/)*
-20. Click *OK*
-21. Under *Project Settings > Project* set the *Project SDK* to ***9***
-22. Set the *Project language level* to ***9***
-23. Click *Apply* and *OK*
-
 # Set Up IntelliJ Settings
 
 1. Ask Ryan for the IntelliJ settings token
@@ -42,11 +16,20 @@ Use the following instructions to get the project up and running in IntelliJ on 
 5. Enter the token when prompted
 6. IntelliJ will sync your settings
 
-**Note:** Do NOT overwrite remote settings. The settings will sync automatically.
+**NOTE:** Do NOT overwrite remote settings. The settings will sync automatically.
 
-# Set Up Build Configurations
+# Set Up IntelliJ Project
 
-1. Go to *Run > Edit Configurations*
-2. Click the ***+*** button and choose *JUnit*
-3. For *Name:* enter *Tests*
-4. For *Use classpath of module:* 
+1. Open terminal/Git bash
+2. Navigate to your desired project directory *(Ex: ~/IdeaProjects/)*
+3. Clone the repo: `git clone https://github.com/RyanGPalmer/spaceadventure`
+4. Open the *.ipr* file with IntelliJ
+5. Go to *File > Project Structure* and confirm the selected JDK is ***9***
+
+**MAC/LINUX USERS:** You must go *Preferences > Build, Execution, Deployment > Build Tools > Gradle* and specify the correct *Gradle Home* path. *(Usually /usr/local/opt/gradle/libexec)*
+
+# Building and Running the Project
+
+1. **Refresh:** Go to *Build > Rebuild Project*, then open the *Gradle* panel and click the blue refresh button
+2. To launch from *Windows* or *Linux*, run the ***Main*** configuration
+3. To launch from *Mac OS*, run the ***Main (Mac)*** configuration
