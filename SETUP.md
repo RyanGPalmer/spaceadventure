@@ -30,6 +30,14 @@ Use the following instructions to get the project up and running in IntelliJ on 
 
 # Building and Running the Project
 
-1. **Refresh:** Go to *Build > Rebuild Project*, then open the *Gradle* panel and click the blue refresh button
+1. **Optional Clean Build:** Go to *Build > Rebuild Project*, then open the *Gradle* panel and click the blue refresh button
 2. To launch from *Windows* or *Linux*, run the ***Main*** configuration
 3. To launch from *Mac OS*, run the ***Main (Mac)*** configuration
+
+# Complete Project Refresh (Panic Mode)
+
+1. Clean run configs (Necessary due to bug): `rm -r -f .runConfigurations/`
+2. Reset the local repo: `git reset --hard`
+3. Remove untracked/ignored files: `git clean -x -f`
+4. Pull and rebase: `git pull --rebase origin master`
+5. Re-open the project
