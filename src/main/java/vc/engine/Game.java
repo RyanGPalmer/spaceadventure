@@ -1,6 +1,5 @@
 package vc.engine;
 
-import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
@@ -13,36 +12,28 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class Game {
-	private static final String MAIN_THREAD = "System";
+public abstract class Game {
+	private static final String MAIN_THREAD = "SYSTEM";
 
 	private final String title;
 	private final GameSettings settings;
 
-	// The window handle
-	private long window;
+	private long window; // The window handle
+	private boolean running;
 
 	public Game(final String title) {
 		Thread.currentThread().setName(MAIN_THREAD);
+		running = false;
 		Log.startLogWorker();
 		this.title = title;
 		GameSettings settings = GameSettingsLoader.load();
 		this.settings = settings != null ? settings : GameSettings.getDefault();
-		run();
-		saveAndExit();
 	}
 
-	private void run() {
+	protected void start() {
 		init();
 		loop();
-
-		// Free the window callbacks and destroy the window
-		glfwFreeCallbacks(window);
-		glfwDestroyWindow(window);
-
-		// Terminate GLFW and free the error callback
-		glfwTerminate();
-		glfwSetErrorCallback(null).free();
+		cleanup();
 	}
 
 	private void init() {
@@ -105,24 +96,47 @@ public class Game {
 		// creates the GLCapabilities instance and makes the OpenGL
 		// bindings available for use.
 		GL.createCapabilities();
-
-		// Set the clear color
 		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 
-		// Run the rendering loop until the user has attempted to close
-		// the window or has pressed the ESCAPE key.
-		while (!glfwWindowShouldClose(window)) {
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+		running = true;
+		long lastTime = System.nanoTime();
+		double delta = 0.0;
+		double ns = 1000000000.0 / 60.0;
 
-			glfwSwapBuffers(window); // swap the color buffers
+		while (running) {
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
 
-			// Poll for window events. The key callback above will only be
-			// invoked during this call.
-			glfwPollEvents();
+			if (delta >= 1.0) {
+				update();
+				delta--;
+			}
+
+			render();
+
+			if (glfwWindowShouldClose(window)) running = false;
 		}
 	}
 
-	private void saveAndExit() {
+	private void render() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+		glfwSwapBuffers(window); // swap the color buffers
+		glfwPollEvents(); // Poll for window events. The key callback above will only be invoked during this call.
+	}
+
+	protected abstract void update();
+
+	private void cleanup() {
+		// Free the window callbacks and destroy the window
+		glfwFreeCallbacks(window);
+		glfwDestroyWindow(window);
+
+		// Terminate GLFW and free the error callback
+		glfwTerminate();
+		glfwSetErrorCallback(null).free();
+
+		// Save settings and stop log worker
 		GameSettingsLoader.save(settings);
 		Log.stopLogWorker();
 	}

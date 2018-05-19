@@ -10,6 +10,11 @@ public class SpaceAdventure extends Game {
 	}
 
 	public static void main(String... args) {
-		new SpaceAdventure();
+		new SpaceAdventure().start();
+	}
+
+	@Override
+	protected void update() {
+		
 	}
 }
