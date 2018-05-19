@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="SpaceAdventure_main" target="1.9" />
-      <module name="SpaceAdventure_test" target="1.9" />
+      <module name="spaceadventure_main" target="1.10" />
+      <module name="spaceadventure_test" target="1.10" />
     </bytecodeTargetLevel>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
@@ -30,9 +30,9 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpaceAdventure.iml" filepath="$PROJECT_DIR$/SpaceAdventure.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SpaceAdventure_main.iml" filepath="$PROJECT_DIR$/SpaceAdventure_main.iml" group="SpaceAdventure" />
-      <module fileurl="file://$PROJECT_DIR$/SpaceAdventure_test.iml" filepath="$PROJECT_DIR$/SpaceAdventure_test.iml" group="SpaceAdventure" />
+      <module fileurl="file://$PROJECT_DIR$/spaceadventure.iml" filepath="$PROJECT_DIR$/spaceadventure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spaceadventure_main.iml" filepath="$PROJECT_DIR$/spaceadventure_main.iml" group="spaceadventure" />
+      <module fileurl="file://$PROJECT_DIR$/spaceadventure_test.iml" filepath="$PROJECT_DIR$/spaceadventure_test.iml" group="spaceadventure" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="9" project-jdk-type="JavaSDK">
