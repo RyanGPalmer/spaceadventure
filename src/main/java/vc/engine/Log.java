@@ -102,5 +102,7 @@ public final class Log {
 		} catch (Exception e) {
 			Util.message("ERROR", "Encountered " + e.getClass().getName() + " while writing to log file.", false);
 		}
+
+		System.out.print(text);
 	}
 }

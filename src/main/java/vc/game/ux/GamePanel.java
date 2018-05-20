@@ -58,7 +58,7 @@ public abstract class GamePanel extends Frame {
 			try {
 				Thread.sleep(DEFAULT_TICK_RATE);
 			} catch (InterruptedException e) {
-				Log.warn(getClass().getName() + " interrupted during update.");
+				Log.warn(getClass().getName() + " interrupted during tick.");
 			}
 		}
 	}
