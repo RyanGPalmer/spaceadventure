@@ -18,6 +18,8 @@ Use the following instructions to get the project up and running in IntelliJ on 
 
 **NOTE:** Do NOT overwrite remote settings. The settings will sync automatically.
 
+**MAC/LINUX USERS:** You must go *Preferences > Build, Execution, Deployment > Build Tools > Gradle* and specify the correct *Gradle Home* path. *(Usually /usr/local/opt/gradle/libexec)*
+
 # Set Up IntelliJ Project
 
 1. Open terminal/Git bash
@@ -25,8 +27,6 @@ Use the following instructions to get the project up and running in IntelliJ on 
 3. Clone the repo: `git clone https://github.com/RyanGPalmer/spaceadventure`
 4. Open the *.ipr* file with IntelliJ
 5. Go to *File > Project Structure* and confirm the selected JDK is ***9***
-
-**MAC/LINUX USERS:** You must go *Preferences > Build, Execution, Deployment > Build Tools > Gradle* and specify the correct *Gradle Home* path. *(Usually /usr/local/opt/gradle/libexec)*
 
 # Building and Running the Project
 
