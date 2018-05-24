@@ -3,20 +3,20 @@ package vc.engine;
 public abstract class GameObject {
 	protected GameObject() {
 		init();
-		Game.gameObjectManager.register(this);
+		Game.GAME_OBJECT_MANAGER.register(this);
 	}
 
 	protected abstract void init();
 
-	public void earlyTick() {
+	public void earlyTick(final double delta) {
 	}
 
-	public abstract void tick();
+	public abstract void tick(final double delta);
 
-	public void lateTick() {
+	public void lateTick(final double delta) {
 	}
 
 	public final void destroy() {
-		Game.gameObjectManager.deregister(this);
+		Game.GAME_OBJECT_MANAGER.deregister(this);
 	}
 }

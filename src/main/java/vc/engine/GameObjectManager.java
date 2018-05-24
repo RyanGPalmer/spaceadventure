@@ -19,12 +19,10 @@ public class GameObjectManager {
 		return objects.remove(gameObject);
 	}
 
-	public void tickAll() {
-		PerformanceUtils.monitorDuration(() -> {
-			tickEarly();
-			tickNormal();
-			tickLate();
-		}, LONG_OVERALL_TICK_MILLISECONDS, "Long overall tick duration detected.");
+	public void tick(final double delta) {
+		tickEarly(delta);
+		tickNormal(delta);
+		tickLate(delta);
 	}
 
 	public void destroyAll() {
@@ -32,18 +30,18 @@ public class GameObjectManager {
 		for (GameObject go : new ArrayList<>(objects)) go.destroy();
 	}
 
-	public void tickEarly() {
+	public void tickEarly(final double delta) {
 		for (GameObject go : new ArrayList<>(objects))
-			PerformanceUtils.monitorDuration(go::earlyTick, LONG_TICK_MILLISECONDS, "Long early tick detected from '" + go.getClass().getSimpleName() + "'");
+			PerformanceUtils.monitorDuration(() -> go.earlyTick(delta), LONG_TICK_MILLISECONDS, "Long EARLY tick duration detected from '" + go.getClass().getSimpleName() + "'");
 	}
 
-	public void tickNormal() {
+	public void tickNormal(final double delta) {
 		for (GameObject go : new ArrayList<>(objects))
-			PerformanceUtils.monitorDuration(go::tick, LONG_TICK_MILLISECONDS, "Long tick detected from '" + go.getClass().getSimpleName() + "'");
+			PerformanceUtils.monitorDuration(() -> go.tick(delta), LONG_TICK_MILLISECONDS, "Long tick duration detected from '" + go.getClass().getSimpleName() + "'");
 	}
 
-	public void tickLate() {
+	public void tickLate(final double delta) {
 		for (GameObject go : new ArrayList<>(objects))
-			PerformanceUtils.monitorDuration(go::lateTick, LONG_TICK_MILLISECONDS, "Long late tick detected from '" + go.getClass().getSimpleName() + "'");
+			PerformanceUtils.monitorDuration(() -> go.lateTick(delta), LONG_TICK_MILLISECONDS, "Long LATE tick duration detected from '" + go.getClass().getSimpleName() + "'");
 	}
 }

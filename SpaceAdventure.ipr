@@ -12,7 +12,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="C:/Program Files/gradle/4.7" />
+        <option name="gradleHome" value="/usr/local/opt/gradle/libexec" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -228,9 +228,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-assimp/3.1.6/304c9f35299592263a7561fe86bff1f85180e81e/lwjgl-assimp-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-assimp:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-assimp:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-assimp/3.1.6/1343b93af1d24f91883c0dd3a4204731fdf0754b/lwjgl-assimp-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-assimp/3.1.6/ca29c228f69c3a93d196f761828cfc60d164e7e1/lwjgl-assimp-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -246,9 +246,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-bgfx/3.1.6/4c8fcf2395905427eaf42fda397ce7644be1c972/lwjgl-bgfx-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-bgfx:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-bgfx:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-bgfx/3.1.6/f09d878bb1fca49460fa329d0281381e8ef00a8e/lwjgl-bgfx-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-bgfx/3.1.6/eaf95d6191575fe1b21f1a145910113d51c72ae5/lwjgl-bgfx-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -273,9 +273,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-glfw/3.1.6/af0a105598ed4958e47322663d97cd40e1aa2f96/lwjgl-glfw-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-glfw:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-glfw:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-glfw/3.1.6/7203889aebc265a9600ab4d5a8df8d03c0a1925c/lwjgl-glfw-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-glfw/3.1.6/5f32c8924b07538c48f7854b25ac1d6bcbdec584/lwjgl-glfw-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -300,9 +300,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.1.6/5ba6a6563e3f8e9fa17ee67432aa29a538285b79/lwjgl-jemalloc-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-jemalloc:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-jemalloc:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.1.6/f40c0b362969124a32019b3ee7191e438fdc3901/lwjgl-jemalloc-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.1.6/fbb23c5d095dfcd56a6bee2c4409c7cd37dd9a6f/lwjgl-jemalloc-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -318,9 +318,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-lmdb/3.1.6/34d4fd2333976ae97c19536f5d8a87913e748c43/lwjgl-lmdb-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-lmdb:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-lmdb:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-lmdb/3.1.6/c98312f0c949655202c3bd946baf7611af16c65b/lwjgl-lmdb-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-lmdb/3.1.6/8ef62046f4cd289f381cb0cae19e44b46f257271/lwjgl-lmdb-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -336,9 +336,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-lz4/3.1.6/4836c32519db45eae7877cc906be129f25148e11/lwjgl-lz4-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-lz4:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-lz4:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-lz4/3.1.6/3e64e716c9ad9bb06f90579fd646f97f6c03374/lwjgl-lz4-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-lz4/3.1.6/eb40af78803ab3b4e91e4c3a6203e3ad50560173/lwjgl-lz4-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -354,9 +354,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nanovg/3.1.6/149f9b162b315bedc63dd6b83d88b2cc7b6804da/lwjgl-nanovg-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-nanovg:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-nanovg:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nanovg/3.1.6/61a4afb70e89eddd07d42008e8125a0e0dc2e294/lwjgl-nanovg-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nanovg/3.1.6/81c6a5300c08bd234ab05ce2b2e36b6914caed68/lwjgl-nanovg-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -372,9 +372,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nfd/3.1.6/68e787c5240ea7d30c4af88cb3733a8a32c0c0a5/lwjgl-nfd-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-nfd:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-nfd:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nfd/3.1.6/d930757c83e1782cf41ed62d3e854b147850b060/lwjgl-nfd-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nfd/3.1.6/1a2a633a1ef038e418c00eac91c86cfe658ee321/lwjgl-nfd-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -390,9 +390,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nuklear/3.1.6/ccf33c1b7026ea52d77febf37af3da885ff96321/lwjgl-nuklear-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-nuklear:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-nuklear:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nuklear/3.1.6/62640e9896d09798e8006e1edf3acca9b4c342a/lwjgl-nuklear-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nuklear/3.1.6/a3c6879920ce4acd45eeb393ffff8c0d9754fe9b/lwjgl-nuklear-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -417,9 +417,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openal/3.1.6/d1125b7de9d610b73f7769394f7175b22aea5525/lwjgl-openal-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-openal:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-openal:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openal/3.1.6/351960d5ebb1678ef99016af9e7ca97881af9288/lwjgl-openal-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openal/3.1.6/e0fffeb51fae92ec73de96eb728155eb9ab197b9/lwjgl-openal-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -444,9 +444,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengl/3.1.6/8640d58796d0c7fe3749692ee9e6b2c7b40a1042/lwjgl-opengl-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-opengl:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-opengl:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengl/3.1.6/505ff142070375c86695445a7c593a727af47964/lwjgl-opengl-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengl/3.1.6/179700557bc5deb8ee0c92aa0786ede206cb3dff/lwjgl-opengl-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -462,9 +462,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengles/3.1.6/f74403fac6422a4403623fb8a0c2dd4a44d57cf1/lwjgl-opengles-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-opengles:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-opengles:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengles/3.1.6/7920ce2696b3f5a13ddcd9ef00a0fa95599657e5/lwjgl-opengles-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengles/3.1.6/b6d67e4fd6d2fb03265e4c6ad535063572f12f21/lwjgl-opengles-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -480,9 +480,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openvr/3.1.6/ecea4013b2602e48365b48812eb21dcc3e8c7920/lwjgl-openvr-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-openvr:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-openvr:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openvr/3.1.6/393ed9c27af2ffe4b4917412a60201b1b9516171/lwjgl-openvr-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-openvr/3.1.6/4f304f228625fcfbe3413333293042de6ee81cc2/lwjgl-openvr-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -498,15 +498,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-ovr/3.1.6/5664b49b392521534843451d7770c11ad644bc0b/lwjgl-ovr-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-ovr:3.1.6:natives-windows">
-      <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-ovr/3.1.6/c65fc6ebc9949278de5b483d1abffc262f68bfc3/lwjgl-ovr-3.1.6-natives-windows.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-ovr/3.1.6/5664b49b392521534843451d7770c11ad644bc0b/lwjgl-ovr-3.1.6-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Gradle: org.lwjgl:lwjgl-par:3.1.6">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-par/3.1.6/58579f80d585eade74dcd369bd27208ad172d00/lwjgl-par-3.1.6.jar!/" />
@@ -516,9 +507,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-par/3.1.6/f21344b9b5a1bdab97730fa2a55ef7ccf231bc33/lwjgl-par-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-par:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-par:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-par/3.1.6/32537fa6f59cef79114f3d82221b6b189ce077ac/lwjgl-par-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-par/3.1.6/b9d4d810d2ae8dfa08cc25396961ed327a46a9a2/lwjgl-par-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -534,9 +525,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-remotery/3.1.6/691405db148a7de6168a2524932066460f029316/lwjgl-remotery-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-remotery:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-remotery:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-remotery/3.1.6/9cf63f7876fa71f972dcb0afa4d682728d62382f/lwjgl-remotery-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-remotery/3.1.6/fffbbdfda39ff347504e6692b9873bd1a97f5fa9/lwjgl-remotery-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -552,9 +543,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-rpmalloc/3.1.6/d4102b1023ea5bdf77d3ed8bc36529977c662d7c/lwjgl-rpmalloc-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-rpmalloc:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-rpmalloc:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-rpmalloc/3.1.6/3ef478e02c7d0804f9d1ca414e6c5eb8ac137392/lwjgl-rpmalloc-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-rpmalloc/3.1.6/db204afd332d3054c13210a3ceff7574c71ad5a3/lwjgl-rpmalloc-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -570,9 +561,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-sse/3.1.6/79e11c8620fcf81da405b6209c14898a77abfffb/lwjgl-sse-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-sse:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-sse:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-sse/3.1.6/6690a44c1d469b1768e97a069c944a2b4302140d/lwjgl-sse-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-sse/3.1.6/e8f0f95ec22973b2dc8911cf65ef827afab25129/lwjgl-sse-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -588,9 +579,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-stb/3.1.6/600ceb01824c7bdcd43761370bc7bf414acf0a6d/lwjgl-stb-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-stb:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-stb:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-stb/3.1.6/46e0d7bc48189e5f5007a91c5223ad199abbef0b/lwjgl-stb-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-stb/3.1.6/cf948e8f31649fcf528d81e0844082cf9751f138/lwjgl-stb-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -606,9 +597,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyexr/3.1.6/3c23608d37df23a916f9c14d6478347069a4ca05/lwjgl-tinyexr-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-tinyexr:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-tinyexr:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyexr/3.1.6/93122c190c3b770c2c41837830034ca034e5ae6d/lwjgl-tinyexr-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyexr/3.1.6/b8443e75174620ad98c048dd01a08f05ebccf3f7/lwjgl-tinyexr-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -624,9 +615,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyfd/3.1.6/d5336a793dacb8dd0e04791238238d8b11f74d6c/lwjgl-tinyfd-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-tinyfd:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-tinyfd:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyfd/3.1.6/e9f06ad60510ccee224ccd3f3af0ec905086ade2/lwjgl-tinyfd-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tinyfd/3.1.6/2dbeb56c687ae2f65f51a072a522b55b66e7ce22/lwjgl-tinyfd-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -642,9 +633,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tootle/3.1.6/2b9755241056ece10a4b3f3cde296afa470e6e9a/lwjgl-tootle-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-tootle:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-tootle:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tootle/3.1.6/2a9c143599d1107417c979209d9464bde4527394/lwjgl-tootle-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-tootle/3.1.6/6ee2445b019a538691c3ee1e351783497f406bd2/lwjgl-tootle-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -669,9 +660,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-xxhash/3.1.6/cdf119d44f86fb4808fb9b3d6d50cc933331f5cd/lwjgl-xxhash-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-xxhash:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-xxhash:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-xxhash/3.1.6/b22ef1cd8a179ee9d022999f65815622fc63599f/lwjgl-xxhash-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-xxhash/3.1.6/60424414639bd53be9eef7f494735f20fb2e2e0b/lwjgl-xxhash-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -687,9 +678,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-yoga/3.1.6/591c609a3598edd1de48ad1708f3bfbdd22cb38/lwjgl-yoga-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-yoga:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-yoga:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-yoga/3.1.6/644719185ee2e089167d8606cc845b3602d02e45/lwjgl-yoga-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-yoga/3.1.6/20c69c1244f3be761d18be6e7840f3d09fae9cb4/lwjgl-yoga-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -705,9 +696,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-zstd/3.1.6/73c62a1081979e4784fea638e5a4c4299419edb3/lwjgl-zstd-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl-zstd:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl-zstd:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-zstd/3.1.6/fac781a8078ba9e3a55b8413e4f851fab9f694a8/lwjgl-zstd-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-zstd/3.1.6/3c67c9f78939232a0847fce036c25c8d5b9db2fd/lwjgl-zstd-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -723,9 +714,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl/3.1.6/496f4d0ece899058dadcc336a4e9c43dc8fbe24b/lwjgl-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.lwjgl:lwjgl:3.1.6:natives-windows">
+    <library name="Gradle: org.lwjgl:lwjgl:3.1.6:natives-macos">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl/3.1.6/a6ebe0dfde6c29836cbd928177012265ec4a8418/lwjgl-3.1.6-natives-windows.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl/3.1.6/4511eb54308ec79f16bb3c762af2444da681f0de/lwjgl-3.1.6-natives-macos.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>

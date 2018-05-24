@@ -20,14 +20,6 @@ public final class SpaceAdventure extends Game {
 	@Override
 	protected final void awake() {
 		texture = Texture2D.load(TEXTURE_PATH);
-		for (int i = 0; i < 10; i++) new TestObject(i + 1);
-	}
-
-	@Override
-	protected final void tick() {
-	}
-
-	@Override
-	protected final void beforeExit() {
+		for (int i = 0; i < 10000; i++) new TestObject(i + 1);
 	}
 }

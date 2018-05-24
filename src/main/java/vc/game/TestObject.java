@@ -14,7 +14,9 @@ public class TestObject extends GameObject {
 	}
 
 	@Override
-	public void tick() {
-		TestObjectManager.addMessage("" + num);
+	public void tick(final double delta) {
+		for (int i = 0; i < num; i++) {
+			int j = 2 + 2;
+		}
 	}
 }

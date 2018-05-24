@@ -3,6 +3,8 @@ package vc.engine;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
+import vc.engine.util.DataSerializer;
+import vc.engine.util.TickTimer;
 
 import java.nio.*;
 
@@ -14,29 +16,30 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public abstract class Game {
 	private static final String MAIN_THREAD = "SYSTEM";
-
-	public static final GameObjectManager gameObjectManager = new GameObjectManager();
+	private static final String SETTINGS_FILE_PATH = "settings.dat";
+	public static final GameObjectManager GAME_OBJECT_MANAGER = new GameObjectManager();
 
 	private final String title;
 	private final GameSettings settings;
+	private final TickTimer timer;
 
 	private long window; // The window handle
-	private boolean running;
+	private boolean running = false;
 
 	protected Game(final String title) {
 		Thread.currentThread().setName(MAIN_THREAD);
-		running = false;
 		Log.startLogWorker();
 		this.title = title;
-		GameSettings settings = GameSettingsLoader.load();
+		GameSettings settings = new DataSerializer<GameSettings>(SETTINGS_FILE_PATH).load();
 		this.settings = settings != null ? settings : GameSettings.getDefault();
+		Log.info(settings != null ? "Settings loaded." : "Settings not loaded. New settings generated.");
+		timer = new TickTimer(this.settings.tickRate);
 	}
 
 	protected final void start() {
 		init();
 		awake();
 		loop();
-		beforeExit();
 		cleanup();
 	}
 
@@ -89,7 +92,7 @@ public abstract class Game {
 		// Make the OpenGL context current
 		glfwMakeContextCurrent(window);
 		// Enable v-sync
-		glfwSwapInterval(1);
+		glfwSwapInterval(settings.vsync ? 1 : 0);
 
 		// Make the window visible
 		glfwShowWindow(window);
@@ -100,81 +103,46 @@ public abstract class Game {
 		// creates the GLCapabilities instance and makes the OpenGL
 		// bindings available for use.
 		GL.createCapabilities();
+		glEnable(GL_TEXTURE_2D);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	}
 
 	private final void loop() {
-		glEnable(GL_TEXTURE_2D);
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
 		running = true;
-		long lastTime = System.nanoTime();
-		double delta = 0.0;
-		double deltaS = 0.0;
-		double ns = 1000000000.0 / 60.0;
-		int ticks = 0;
-
-		float width = 1;
-		float height = 1;
-		int wSwitch = -1;
-		int hSwitch = -1;
+		timer.init();
 
 		while (running) {
-			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			deltaS += (now - lastTime) / ns;
-			lastTime = now;
-
-			if (delta >= 1.0) {
-				if (width >= 2) wSwitch = -1;
-				else if (width <= 0.2f) wSwitch = 1;
-				if (height >= 2) hSwitch = -1;
-				else if (height <= 0.2f) hSwitch = 1;
-				width += 0.01f * wSwitch;
-				height += 0.01f * hSwitch;
-				tick0();
-				ticks++;
-				delta--;
-			}
-
-			if (deltaS >= 60.0) {
-				if (ticks < 30) Log.warn("Low tick rate detected: " + ticks);
-				ticks = 0;
-				deltaS = 0;
-			}
-
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-			render(width, height);
-			glfwSwapBuffers(window); // swap the color buffers
-			glfwPollEvents(); // Poll for window events. The key callback above will only be invoked during this call.
-
-			if (glfwWindowShouldClose(window)) running = false;
+			timer.update();
+			if (timer.shouldTick()) tick(timer.onTick());
+			render();
+			running = !glfwWindowShouldClose(window);
 		}
 	}
 
-	private final void render(float width, float height) {
+	private final void render() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0);
-		glVertex2f(width / 2f * -1f, height / 2f * -1f);
+		glVertex2f(-1, -1);
 		glTexCoord2f(0, 1);
-		glVertex2f(width / 2f * -1f, height / 2f);
+		glVertex2f(-1, 1);
 		glTexCoord2f(1, 1);
-		glVertex2f(width / 2f, height / 2f);
+		glVertex2f(1, 1);
 		glTexCoord2f(1, 0);
-		glVertex2f(width / 2f, height / 2f * -1f);
+		glVertex2f(1, -1);
 		glEnd();
+
+		glfwSwapBuffers(window); // swap the color buffers
+		glfwPollEvents(); // Poll for window events. The key callback above will only be invoked during this call.
 	}
 
-	private final void tick0() {
-		tick();
-		gameObjectManager.tickAll();
+	protected void tick(final double delta) {
+		GAME_OBJECT_MANAGER.tick(delta);
 	}
-
-	protected abstract void tick();
-
-	protected abstract void beforeExit();
 
 	private final void cleanup() {
-		gameObjectManager.destroyAll();
+		GAME_OBJECT_MANAGER.destroyAll();
 
 		// Free the window callbacks and destroy the window
 		glfwFreeCallbacks(window);
@@ -185,7 +153,7 @@ public abstract class Game {
 		glfwSetErrorCallback(null).free();
 
 		// Save settings and stop log worker
-		GameSettingsLoader.save(settings);
+		new DataSerializer<>(SETTINGS_FILE_PATH).save(settings);
 		Log.stopLogWorker();
 	}
 }

@@ -104,13 +104,6 @@ public class Util {
 		return JOptionPane.showConfirmDialog(null, text, title, JOptionPane.YES_NO_OPTION) == 0;
 	}
 
-	public static String getStackTrace(Throwable e) {
-		String stackTrace = "";
-		for (StackTraceElement st : e.getStackTrace())
-			stackTrace += "\n\t" + st.getClassName() + '.' + st.getMethodName() + '(' + st.getFileName() + ':' + st.getLineNumber() + ')';
-		return stackTrace;
-	}
-
 	public static String capitalize(String text) {
 		if (text == null || text.length() < 1) return text;
 		String result = ("" + text.charAt(0)).toUpperCase();

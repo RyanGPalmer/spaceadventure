@@ -2,8 +2,8 @@ package vc.game;
 
 import vc.engine.Log;
 import vc.game.utilities.Util;
-import vc.game.utilities.tasks.GameDataLoader;
-import vc.game.utilities.tasks.GameDataSaver;
+import vc.game.utilities.tasks.GameDataLoaderTask;
+import vc.game.utilities.tasks.GameDataSaverTask;
 import vc.game.utilities.tasks.TaskWorkerExecutionFrame;
 import vc.game.ux.GamePanel;
 import vc.game.world.Galaxy;
@@ -47,11 +47,11 @@ public class MainMenu extends GamePanel {
 
 	private void saveGameData() {
 		// TODO Why isn't this label displaying?
-		new TaskWorkerExecutionFrame(this, new GameDataSaver(seed.seed));
+		new TaskWorkerExecutionFrame(this, new GameDataSaverTask(seed.seed));
 	}
 
 	private Seed loadGameData() {
-		Long result = (Long) new TaskWorkerExecutionFrame(this, new GameDataLoader()).getResult();
+		Long result = (Long) new TaskWorkerExecutionFrame(this, new GameDataLoaderTask()).getResult();
 		return result != null ? new Seed(result) : null;
 	}
 }

@@ -77,11 +77,11 @@ public final class Log {
 	}
 
 	public static void uncaughtException(Throwable e) {
-		error("UNHANDLED: " + e.toString() + Util.getStackTrace(e));
+		error("UNCAUGHT EXCEPTION: " + e.toString() + getStackTrace(e));
 	}
 
 	public static void exception(Throwable e) {
-		error(e.toString() + Util.getStackTrace(e));
+		addLineToLogBuffer(e.toString() + getStackTrace(e));
 	}
 
 	public static void interrupt() {
@@ -104,5 +104,12 @@ public final class Log {
 		}
 
 		System.out.print(text);
+	}
+
+	public static String getStackTrace(Throwable e) {
+		String stackTrace = "";
+		for (StackTraceElement st : e.getStackTrace())
+			stackTrace += "\n\t" + st.getClassName() + '.' + st.getMethodName() + '(' + st.getFileName() + ':' + st.getLineNumber() + ')';
+		return stackTrace;
 	}
 }
