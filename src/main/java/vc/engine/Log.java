@@ -12,8 +12,10 @@ public final class Log {
 	private static final String LOG_FILE_NAME = "log.txt";
 	private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	private static final String DIV = " - ";
-	private static final String LOG_ERROR = "ERROR: ";
-	private static final String LOG_WARN = "Warning: ";
+	private static final String LOG_ERROR = "ERROR - ";
+	private static final String LOG_WARN = "Warning - ";
+	private static final String LOG_UNCAUGHT = "UNCAUGHT EXCEPTION - ";
+	private static final String LOG_INTERRUPT_MESSAGE = "Thread interrupted while waiting.";
 	private static final List<String> LOG_BUFFER = new ArrayList<>();
 	private static final int LOG_WRITE_INTERVAL = 1000;
 	private static final Object LOG_MUTEX = new Object();
@@ -72,20 +74,25 @@ public final class Log {
 		log(LOG_ERROR + message);
 	}
 
+	public static void error(String message, Throwable e) {
+		error(message);
+		exception(e);
+	}
+
 	public static void warn(String message) {
 		log(LOG_WARN + message);
 	}
 
 	public static void uncaughtException(Throwable e) {
-		error("UNCAUGHT EXCEPTION: " + e.toString() + getStackTrace(e));
+		error(LOG_UNCAUGHT + e.toString() + getStackTrace(e));
 	}
 
-	public static void exception(Throwable e) {
+	private static void exception(Throwable e) {
 		addLineToLogBuffer(e.toString() + getStackTrace(e));
 	}
 
 	public static void interrupt() {
-		warn("Thread interrupted while sleeping.");
+		warn(LOG_INTERRUPT_MESSAGE);
 	}
 
 	private static void addLineToLogBuffer(String line) {
@@ -100,7 +107,8 @@ public final class Log {
 			fw.write(text);
 			fw.close();
 		} catch (Exception e) {
-			Util.message("ERROR", "Encountered " + e.getClass().getName() + " while writing to log file.", false);
+			error("Failed to write logs to file.");
+			exception(e);
 		}
 
 		System.out.print(text);

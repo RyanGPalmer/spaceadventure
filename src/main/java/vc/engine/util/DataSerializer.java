@@ -12,36 +12,23 @@ public class DataSerializer<T> {
 	}
 
 	public boolean save(T data) {
-		try {
-			FileOutputStream file = new FileOutputStream(path);
-			ObjectOutputStream out = new ObjectOutputStream(file);
+		try (FileOutputStream file = new FileOutputStream(path); ObjectOutputStream out = new ObjectOutputStream(file)) {
 			out.writeObject(data);
-			out.close();
-			file.close();
 			return true;
 		} catch (Exception e) {
-			Log.error("Failed to save data. (" + path + ")");
-			Log.exception(e);
+			Log.error("Failed to save data. (" + path + ")", e);
 			return false;
 		}
 	}
 
 	public T load() {
 		T data;
-		FileInputStream file;
-		ObjectInputStream in;
-
-		try {
-			file = new FileInputStream(path);
-			in = new ObjectInputStream(file);
+		try (FileInputStream file = new FileInputStream(path); ObjectInputStream in = new ObjectInputStream(file)) {
 			data = (T) in.readObject();
-			in.close();
-			file.close();
 		} catch (FileNotFoundException e) {
 			return null;
 		} catch (Exception e) {
-			Log.warn("Something went wrong while loading data. (" + path + ")");
-			Log.exception(e);
+			Log.error("Something went wrong while loading data. (" + path + ")", e);
 			return null;
 		}
 

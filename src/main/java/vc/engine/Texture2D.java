@@ -83,10 +83,8 @@ public class Texture2D {
 
 			stbi_set_flip_vertically_on_load(true);
 			img = stbi_load(path, w, h, comp, 4);
-			if (img == null) {
-				Log.error("Failed to load a texture: " + path);
-				Log.exception(new RuntimeException(stbi_failure_reason()));
-			}
+			if (img == null)
+				Log.error("Failed to load a texture: " + path, new RuntimeException(stbi_failure_reason()));
 
 			width = w.get();
 			height = h.get();

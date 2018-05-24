@@ -25,8 +25,8 @@ public class GameObjectManager {
 		tickLate(delta);
 	}
 
-	public void destroyAll() {
-		Log.info("Destroyed " + objects.size() + " game objects.");
+	public void clean() {
+		Log.info("Cleaned up " + objects.size() + " game objects.");
 		for (GameObject go : new ArrayList<>(objects)) go.destroy();
 	}
 
