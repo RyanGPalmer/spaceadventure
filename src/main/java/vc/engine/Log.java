@@ -9,7 +9,7 @@ import java.util.List;
 import vc.game.utilities.Util;
 
 public final class Log {
-	private static final String LOG_FILE_NAME = "log.txt";
+	private static final String LOG_FILE_NAME = "runtime.log";
 	private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	private static final String DIV = " - ";
 	private static final String LOG_ERROR = "ERROR - ";

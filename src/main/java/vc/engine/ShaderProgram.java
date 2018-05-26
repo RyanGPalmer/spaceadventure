@@ -85,7 +85,7 @@ public class ShaderProgram {
 
 	public void use() {
 		if (check()) glUseProgram(id);
-		else Log.error("Tried to use an unlinked shader program.", new RuntimeException(glGetProgramInfoLog(id)));
+		else Log.error("Unlinked shader program. Info: " + glGetProgramInfoLog(id), new RuntimeException());
 	}
 
 	public int getID() {
