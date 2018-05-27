@@ -1,6 +1,7 @@
 package vc.engine;
 
 import org.lwjgl.system.MemoryStack;
+import vc.engine.math.Matrix4;
 
 import java.nio.FloatBuffer;
 
@@ -54,10 +55,10 @@ public class Renderer {
 	}
 
 	private void setUniforms() {
-		sp.setUniform("model", new Matrix4f());
-		sp.setUniform("view", new Matrix4f());
+		sp.setUniform("model", new Matrix4());
+		sp.setUniform("view", new Matrix4());
 		float ratio = (float) gl.getScreenX() / (float) gl.getScreenY();
-		sp.setUniform("projection", Matrix4f.orthographic(-ratio, ratio, -1f, 1f, -1f, 1f));
+		sp.setUniform("projection", Matrix4.orthographic(-ratio, ratio, -1f, 1f, -1f, 1f));
 	}
 
 	public void render() {
@@ -71,7 +72,7 @@ public class Renderer {
 		vao.bind();
 		sp.use();
 
-		Matrix4f model = Matrix4f.rotate(angle += 0.2f, -1f, 0f, 1f);
+		Matrix4 model = Matrix4.rotate(angle += 0.2f, -1f, 0f, 1f);
 		sp.setUniform("model", model);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);

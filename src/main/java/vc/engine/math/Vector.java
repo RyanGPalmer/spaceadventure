@@ -98,32 +98,35 @@ public class Vector {
 		return true;
 	}
 
-	public void add(Vector v) {
-		if (!checkCompatibility(this, v)) return;
+	public Vector add(Vector v) {
+		if (!checkCompatibility(this, v)) return this;
 		for (int i = 0; i < getSize(); i++) dimensions[i] += v.get(i);
+		return this;
 	}
 
-	public void subtract(Vector v) {
-		if (!checkCompatibility(this, v)) return;
-		for (int i = 0; i < getSize(); i++) dimensions[i] -= v.get(i);
+	public Vector subtract(Vector v) {
+		if (!checkCompatibility(this, v)) return this;
+		Vector v2 = new Vector(v);
+		return add(v2.negate());
 	}
 
-	public void scale(float scalar) {
+	public Vector scale(float scalar) {
 		for (int i = 0; i < getSize(); i++) dimensions[i] *= scalar;
+		return this;
 	}
 
-	public void normalize() {
-		scale(1f / getLength());
+	public Vector normalize() {
+		return scale(1f / getLength());
 	}
 
-	public void lerp(Vector v, float alpha) {
+	public Vector lerp(Vector v, float alpha) {
 		scale(1f - alpha);
-		v.scale(alpha);
-		add(v);
+		Vector v2 = new Vector(v);
+		return add(v2.scale(alpha));
 	}
 
-	public void negate() {
-		scale(-1);
+	public Vector negate() {
+		return scale(-1);
 	}
 
 	public float getLength() {
@@ -153,8 +156,9 @@ public class Vector {
 	}
 
 	public String toString() {
-		String s = "[";
-		for (float d : dimensions) s += d + ", ";
-		return s.substring(0, s.length() - 2) + "]";
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		for (float d : dimensions) sb.append(d + ", ");
+		return sb.substring(0, sb.length() - 2) + "]";
 	}
 }

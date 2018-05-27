@@ -1,6 +1,7 @@
 package vc.engine;
 
 import org.lwjgl.system.MemoryStack;
+import vc.engine.math.Matrix4;
 
 import java.nio.FloatBuffer;
 import java.util.Arrays;
@@ -63,7 +64,7 @@ public class ShaderProgram {
 		glVertexAttribPointer(location, size, GL_FLOAT, false, stride, offset);
 	}
 
-	public void setUniform(String name, Matrix4f value) {
+	public void setUniform(String name, Matrix4 value) {
 		try (MemoryStack stack = MemoryStack.stackPush()) {
 			FloatBuffer buffer = stack.mallocFloat(4 * 4);
 			value.toBuffer(buffer);

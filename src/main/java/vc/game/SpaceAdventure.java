@@ -2,6 +2,8 @@ package vc.game;
 
 import vc.engine.Game;
 import vc.engine.Texture2D;
+import vc.engine.math.Matrix;
+import vc.engine.math.Vector;
 
 public final class SpaceAdventure extends Game {
 	private static final String TITLE = "Space Adventure";
