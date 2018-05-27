@@ -51,6 +51,7 @@ public abstract class Game {
 	}
 
 	private final void clean() {
+		timer.stop();
 		GAME_OBJECT_MANAGER.clean();
 		renderer.close();
 		gl.close();

@@ -27,16 +27,8 @@ public class Renderer {
 		vao = VertexArrayObject.create();
 
 		// Create VBO
-		try (MemoryStack stack = MemoryStack.stackPush()) {
-			FloatBuffer vertices = stack.mallocFloat(3 * 6);
-			vertices.put(-0.6f).put(-0.4f).put(0f).put(1f).put(0f).put(0f);
-			vertices.put(0.6f).put(-0.4f).put(0f).put(0f).put(1f).put(0f);
-			vertices.put(0f).put(0.721f).put(0f).put(0f).put(0f).put(1f);
-			vertices.flip();
-
-			vbo = VertexBufferObject.create();
-			vbo.upload(vertices);
-		}
+		vbo = VertexBufferObject.create();
+		vbo.upload(getPyramidVertices());
 
 		Shader v = Shader.create(GL_VERTEX_SHADER, gl.isLegacy());
 		Shader f = Shader.create(GL_FRAGMENT_SHADER, gl.isLegacy());
@@ -44,7 +36,9 @@ public class Renderer {
 		if (!gl.isLegacy()) sp.bindFragDataLocation(0, "fragColor");
 		sp.link();
 		sp.use();
+
 		setVertexAttributes();
+
 		setUniforms();
 		Log.info("Renderer initialized.");
 	}
@@ -72,10 +66,10 @@ public class Renderer {
 		vao.bind();
 		sp.use();
 
-		Matrix4 model = Matrix4.rotate(angle += 0.2f, -1f, 0f, 1f);
+		Matrix4 model = Matrix4.rotate(angle += 0.2f, 1f, 1f, 1f);
 		sp.setUniform("model", model);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 9);
 	}
 
 	private void renderLegacy() {
@@ -96,5 +90,25 @@ public class Renderer {
 		vbo.delete();
 		sp.delete();
 		Log.info("Renderer closed.");
+	}
+
+	public FloatBuffer getPyramidVertices() {
+		try (MemoryStack stack = MemoryStack.stackPush()) {
+			FloatBuffer vertices = stack.mallocFloat(9 * 6);
+			vertices.put(0f).put(0.7f).put(0f).put(1f).put(0f).put(0f); // top point
+			vertices.put(0.4f).put(0f).put(0.4f).put(1f).put(0f).put(0f);
+			vertices.put(-0.4f).put(0f).put(0.4f).put(1f).put(0f).put(0f);
+
+			vertices.put(0f).put(0.7f).put(0f).put(0f).put(1f).put(0f); // top point
+			vertices.put(0f).put(0f).put(-0.4f).put(0f).put(1f).put(0f);
+			vertices.put(0.4f).put(0f).put(0.4f).put(0f).put(1f).put(0f);
+
+			vertices.put(0f).put(0.7f).put(0f).put(0f).put(0f).put(1f); // top point
+			vertices.put(-0.4f).put(0f).put(0.4f).put(0f).put(0f).put(1f);
+			vertices.put(0f).put(0f).put(-0.4f).put(0f).put(0f).put(1f);
+
+			vertices.flip();
+			return vertices;
+		}
 	}
 }
