@@ -5,7 +5,7 @@ import vc.engine.Log;
 import java.nio.FloatBuffer;
 
 /**
- * The generic Vector class representing any n-dimensional Vector.
+ * Generic Vector class representing any n-dimensional Vector.
  *
  * @author Ryan Palmer
  */
