@@ -34,7 +34,6 @@ public class GLContext {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE); // UNCOMMENT TO TEST LEGACY SETTINGS
 		window = glfwCreateWindow(settings.screenX, settings.screenY, title, settings.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
 		if (window == NULL) {

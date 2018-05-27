@@ -1,5 +1,8 @@
 package vc.engine;
 
+import vc.engine.math.Vector3;
+import vc.engine.math.Vector4;
+
 import java.nio.FloatBuffer;
 
 /**
@@ -29,26 +32,27 @@ public class Matrix4f {
 	 * @param col3 Vector with values of the third column
 	 * @param col4 Vector with values of the fourth column
 	 */
-	public Matrix4f(Vector4f col1, Vector4f col2, Vector4f col3, Vector4f col4) {
-		m00 = col1.x;
-		m10 = col1.y;
-		m20 = col1.z;
-		m30 = col1.w;
+	public Matrix4f(Vector4 col1, Vector4 col2, Vector4 col3, Vector4 col4) {
+		m00 = col1.getX();
+		m10 = col1.getY();
+		m10 = col1.getY();
+		m20 = col1.getZ();
+		m30 = col1.getW();
 
-		m01 = col2.x;
-		m11 = col2.y;
-		m21 = col2.z;
-		m31 = col2.w;
+		m01 = col2.getX();
+		m11 = col2.getY();
+		m21 = col2.getZ();
+		m31 = col2.getW();
 
-		m02 = col3.x;
-		m12 = col3.y;
-		m22 = col3.z;
-		m32 = col3.w;
+		m02 = col3.getX();
+		m12 = col3.getY();
+		m22 = col3.getZ();
+		m32 = col3.getW();
 
-		m03 = col4.x;
-		m13 = col4.y;
-		m23 = col4.z;
-		m33 = col4.w;
+		m03 = col4.getX();
+		m13 = col4.getY();
+		m23 = col4.getZ();
+		m33 = col4.getW();
 	}
 
 	/**
@@ -163,12 +167,12 @@ public class Matrix4f {
 	 * @param vector The vector
 	 * @return Vector product of this * other
 	 */
-	public Vector4f multiply(Vector4f vector) {
-		float x = this.m00 * vector.x + this.m01 * vector.y + this.m02 * vector.z + this.m03 * vector.w;
-		float y = this.m10 * vector.x + this.m11 * vector.y + this.m12 * vector.z + this.m13 * vector.w;
-		float z = this.m20 * vector.x + this.m21 * vector.y + this.m22 * vector.z + this.m23 * vector.w;
-		float w = this.m30 * vector.x + this.m31 * vector.y + this.m32 * vector.z + this.m33 * vector.w;
-		return new Vector4f(x, y, z, w);
+	public Vector4 multiply(Vector4 vector) {
+		float x = this.m00 * vector.getX() + this.m01 * vector.getY() + this.m02 * vector.getZ() + this.m03 * vector.getW();
+		float y = this.m10 * vector.getX() + this.m11 * vector.getY() + this.m12 * vector.getZ() + this.m13 * vector.getW();
+		float z = this.m20 * vector.getX() + this.m21 * vector.getY() + this.m22 * vector.getZ() + this.m23 * vector.getW();
+		float w = this.m30 * vector.getX() + this.m31 * vector.getY() + this.m32 * vector.getZ() + this.m33 * vector.getW();
+		return new Vector4(x, y, z, w);
 	}
 
 	/**
@@ -371,12 +375,12 @@ public class Matrix4f {
 
 		float c = (float) Math.cos(Math.toRadians(angle));
 		float s = (float) Math.sin(Math.toRadians(angle));
-		Vector3f vec = new Vector3f(x, y, z);
-		if (vec.length() != 1f) {
-			vec = vec.normalize();
-			x = vec.x;
-			y = vec.y;
-			z = vec.z;
+		Vector3 vec = new Vector3(x, y, z);
+		if (vec.getLength() != 1f) {
+			vec.normalize();
+			x = vec.getX();
+			y = vec.getY();
+			z = vec.getZ();
 		}
 
 		rotation.m00 = x * x * (1f - c) + c;

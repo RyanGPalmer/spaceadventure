@@ -1,5 +1,7 @@
 package vc.engine;
 
+import vc.engine.math.Vector2;
+
 import java.nio.FloatBuffer;
 
 /**
@@ -25,12 +27,12 @@ public class Matrix2f {
 	 * @param col1 Vector with values of the first column
 	 * @param col2 Vector with values of the second column
 	 */
-	public Matrix2f(Vector2f col1, Vector2f col2) {
-		m00 = col1.x;
-		m10 = col1.y;
+	public Matrix2f(Vector2 col1, Vector2 col2) {
+		m00 = col1.getX();
+		m10 = col1.getY();
 
-		m01 = col2.x;
-		m11 = col2.y;
+		m01 = col2.getX();
+		m11 = col2.getY();
 	}
 
 	/**
@@ -105,10 +107,10 @@ public class Matrix2f {
 	 * @param vector The vector
 	 * @return Vector product of this * other
 	 */
-	public Vector2f multiply(Vector2f vector) {
-		float x = this.m00 * vector.x + this.m01 * vector.y;
-		float y = this.m10 * vector.x + this.m11 * vector.y;
-		return new Vector2f(x, y);
+	public Vector2 multiply(Vector2 vector) {
+		float x = this.m00 * vector.getX() + this.m01 * vector.getY();
+		float y = this.m10 * vector.getX() + this.m11 * vector.getY();
+		return new Vector2(x, y);
 	}
 
 	/**

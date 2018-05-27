@@ -81,5 +81,8 @@ dependencies {
 	compile "org.lwjgl:lwjgl-yoga:$lwjglVersion:$lwjglNatives"
 	compile "org.lwjgl:lwjgl-zstd:$lwjglVersion:$lwjglNatives"
 
-	testCompile 'junit:junit:4.12'
+	testCompileOnly "junit:junit:4.12"
+	testImplementation "org.junit.jupiter:junit-jupiter-api:5.1.0"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.1.0"
+	testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.1.0"
 }

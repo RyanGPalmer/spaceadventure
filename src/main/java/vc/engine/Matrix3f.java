@@ -1,5 +1,7 @@
 package vc.engine;
 
+import vc.engine.math.Vector3;
+
 import java.nio.FloatBuffer;
 
 /**
@@ -27,18 +29,18 @@ public class Matrix3f {
 	 * @param col2 Vector with values of the second column
 	 * @param col3 Vector with values of the third column
 	 */
-	public Matrix3f(Vector3f col1, Vector3f col2, Vector3f col3) {
-		m00 = col1.x;
-		m10 = col1.y;
-		m20 = col1.z;
+	public Matrix3f(Vector3 col1, Vector3 col2, Vector3 col3) {
+		m00 = col1.getX();
+		m10 = col1.getY();
+		m20 = col1.getZ();
 
-		m01 = col2.x;
-		m11 = col2.y;
-		m21 = col2.z;
+		m01 = col2.getX();
+		m11 = col2.getY();
+		m21 = col2.getZ();
 
-		m02 = col3.x;
-		m12 = col3.y;
-		m22 = col3.z;
+		m02 = col3.getX();
+		m12 = col3.getY();
+		m22 = col3.getZ();
 	}
 
 	/**
@@ -130,11 +132,11 @@ public class Matrix3f {
 	 * @param vector The vector
 	 * @return Vector product of this * other
 	 */
-	public Vector3f multiply(Vector3f vector) {
-		float x = this.m00 * vector.x + this.m01 * vector.y + this.m02 * vector.z;
-		float y = this.m10 * vector.x + this.m11 * vector.y + this.m12 * vector.z;
-		float z = this.m20 * vector.x + this.m21 * vector.y + this.m22 * vector.z;
-		return new Vector3f(x, y, z);
+	public Vector3 multiply(Vector3 vector) {
+		float x = this.m00 * vector.getX() + this.m01 * vector.getY() + this.m02 * vector.getZ();
+		float y = this.m10 * vector.getX() + this.m11 * vector.getY() + this.m12 * vector.getZ();
+		float z = this.m20 * vector.getX() + this.m21 * vector.getY() + this.m22 * vector.getZ();
+		return new Vector3(x, y, z);
 	}
 
 	/**
