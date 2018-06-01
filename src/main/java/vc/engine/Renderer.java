@@ -1,9 +1,6 @@
 package vc.engine;
 
-import org.lwjgl.system.MemoryStack;
 import vc.engine.math.Matrix4;
-
-import java.nio.FloatBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -15,7 +12,14 @@ public class Renderer {
 	private VertexArrayObject vao;
 	private VertexBufferObject vbo;
 	private ShaderProgram sp;
+	private int posLoc, colLoc;
+
 	float angle = 0f;
+	float[] pyramidData = {
+			-0.5f, 0, 0.5f, 1, 0, 0,
+			0, 0.5f, 0f, 0, 1, 0,
+			0.5f, 0, 0.5f, 0, 0, 1
+	};
 
 	public Renderer(GLContext gl) {
 		this.gl = gl;
@@ -25,10 +29,7 @@ public class Renderer {
 		glEnable(GL_TEXTURE_2D);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		vao = VertexArrayObject.create();
-
-		// Create VBO
 		vbo = VertexBufferObject.create();
-		vbo.upload(getPyramidVertices());
 
 		Shader v = Shader.create(GL_VERTEX_SHADER, gl.isLegacy());
 		Shader f = Shader.create(GL_FRAGMENT_SHADER, gl.isLegacy());
@@ -37,15 +38,17 @@ public class Renderer {
 		sp.link();
 		sp.use();
 
-		setVertexAttributes();
+		vbo.upload(pyramidData);
+
+		posLoc = sp.getAttributeLocation("position");
+		colLoc = sp.getAttributeLocation("color");
+		sp.enableVertexAttribute(posLoc);
+		sp.enableVertexAttribute(colLoc);
+		sp.pointVertexAttribute(posLoc, 3, 6 * GL_FLOAT, 0);
+		sp.pointVertexAttribute(colLoc, 3, 6 * GL_FLOAT, 3 * GL_FLOAT);
 
 		setUniforms();
 		Log.info("Renderer initialized.");
-	}
-
-	private void setVertexAttributes() {
-		sp.addAttribute("position");
-		sp.addAttribute("color", 3);
 	}
 
 	private void setUniforms() {
@@ -63,13 +66,7 @@ public class Renderer {
 	}
 
 	private void renderNormal() {
-		vao.bind();
-		sp.use();
-
-		Matrix4 model = Matrix4.rotate(angle += 0.2f, 1f, 1f, 1f);
-		sp.setUniform("model", model);
-
-		glDrawArrays(GL_TRIANGLES, 0, 9);
+		renderPyramid();
 	}
 
 	private void renderLegacy() {
@@ -92,23 +89,11 @@ public class Renderer {
 		Log.info("Renderer closed.");
 	}
 
-	public FloatBuffer getPyramidVertices() {
-		try (MemoryStack stack = MemoryStack.stackPush()) {
-			FloatBuffer vertices = stack.mallocFloat(9 * 6);
-			vertices.put(0f).put(0.7f).put(0f).put(1f).put(0f).put(0f); // top point
-			vertices.put(0.4f).put(0f).put(0.4f).put(1f).put(0f).put(0f);
-			vertices.put(-0.4f).put(0f).put(0.4f).put(1f).put(0f).put(0f);
-
-			vertices.put(0f).put(0.7f).put(0f).put(0f).put(1f).put(0f); // top point
-			vertices.put(0f).put(0f).put(-0.4f).put(0f).put(1f).put(0f);
-			vertices.put(0.4f).put(0f).put(0.4f).put(0f).put(1f).put(0f);
-
-			vertices.put(0f).put(0.7f).put(0f).put(0f).put(0f).put(1f); // top point
-			vertices.put(-0.4f).put(0f).put(0.4f).put(0f).put(0f).put(1f);
-			vertices.put(0f).put(0f).put(-0.4f).put(0f).put(0f).put(1f);
-
-			vertices.flip();
-			return vertices;
-		}
+	public void renderPyramid() {
+		sp.enableVertexAttribute(posLoc);
+		sp.enableVertexAttribute(colLoc);
+		glDrawArrays(GL_TRIANGLES, 0, 18);
+		sp.disableVertexAttribute(posLoc);
+		sp.disableVertexAttribute(colLoc);
 	}
 }

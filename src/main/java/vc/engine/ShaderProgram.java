@@ -48,19 +48,19 @@ public class ShaderProgram {
 		pointVertexAttribute(location, 3, 6 * FLOAT_SIZE, offset * FLOAT_SIZE);
 	}
 
-	private int getAttributeLocation(String name) {
+	public int getAttributeLocation(String name) {
 		return glGetAttribLocation(id, name);
 	}
 
-	private void enableVertexAttribute(int location) {
+	public void enableVertexAttribute(int location) {
 		glEnableVertexAttribArray(location);
 	}
 
-	private void disableVertexAttribute(int location) {
+	public void disableVertexAttribute(int location) {
 		glDisableVertexAttribArray(location);
 	}
 
-	private void pointVertexAttribute(int location, int size, int stride, int offset) {
+	public void pointVertexAttribute(int location, int size, int stride, int offset) {
 		glVertexAttribPointer(location, size, GL_FLOAT, false, stride, offset);
 	}
 

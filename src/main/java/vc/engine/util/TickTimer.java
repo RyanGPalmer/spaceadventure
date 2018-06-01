@@ -6,6 +6,7 @@ public class TickTimer {
 	private static final double NANOSECONDS = 1000000000.0;
 	private static final int TPS_HISTORY_LENGTH = 30;
 	private static final double LOW_TICK_RATE_FACTOR = 0.5;
+	private static final String TICK_MONITOR = "TickTimer";
 
 	private final Thread tickMonitor = new Thread(() -> monitor());
 	private final double desiredTickRate;
@@ -24,6 +25,7 @@ public class TickTimer {
 		last = getTimeSeconds();
 		for (int i = 0; i < tpsHistory.length; i++) tpsHistory[i] = (int) desiredTickRate;
 		running = true;
+		tickMonitor.setName(TICK_MONITOR);
 		tickMonitor.start();
 	}
 
@@ -80,7 +82,7 @@ public class TickTimer {
 
 	public void monitor() {
 		while (running) {
-			System.out.println("TPS: " + tps + " FPS: " + fps + " AVG: " + getAverageTPS());
+			//System.out.println("TPS: " + tps + " FPS: " + fps + " AVG: " + getAverageTPS());
 			if (tps <= desiredTickRate * LOW_TICK_RATE_FACTOR) Log.warn("Low tick rate detected: " + tps);
 			try {
 				Thread.sleep(10000);
