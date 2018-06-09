@@ -127,12 +127,6 @@ public class Util {
 		return roll <= probability;
 	}
 
-	public static String getCurrentSecondMillis() {
-		String currentTimeMillis = "" + System.currentTimeMillis();
-		if (currentTimeMillis.length() <= 3) return currentTimeMillis;
-		return currentTimeMillis.substring(currentTimeMillis.length() - 3, currentTimeMillis.length());
-	}
-
 	public static void mapGalaxy(Galaxy g) {
 		int minX = g.starSystems[0].getCoords().x;
 		int minY = g.starSystems[0].getCoords().y;

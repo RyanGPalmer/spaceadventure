@@ -61,7 +61,7 @@ public final class Log {
 
 	private static void log(String message) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
-		String dateTime = dtf.format(LocalDateTime.now()) + '.' + Util.getCurrentSecondMillis();
+		String dateTime = dtf.format(LocalDateTime.now()) + '.' + getCurrentSecondMillis();
 		String thread = Thread.currentThread().getName();
 		addLineToLogBuffer(dateTime + DIV + thread + DIV + message);
 	}
@@ -119,5 +119,11 @@ public final class Log {
 		for (StackTraceElement st : e.getStackTrace())
 			stackTrace += "\n\t" + st.getClassName() + '.' + st.getMethodName() + '(' + st.getFileName() + ':' + st.getLineNumber() + ')';
 		return stackTrace;
+	}
+
+	public static String getCurrentSecondMillis() {
+		String currentTimeMillis = "" + System.currentTimeMillis();
+		if (currentTimeMillis.length() <= 3) return currentTimeMillis;
+		return currentTimeMillis.substring(currentTimeMillis.length() - 3, currentTimeMillis.length());
 	}
 }
