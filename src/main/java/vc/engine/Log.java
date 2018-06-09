@@ -27,10 +27,16 @@ public final class Log {
 	}
 
 	public static void startLogWorker() {
-		logWorkerActive = true;
 		LOG_WORKER.setName(LOG_WORKER_NAME);
 //		LOG_WORKER.setUncaughtExceptionHandler(Game.UNCAUGHT_EXCEPTION_HANDLER);
 		LOG_WORKER.start();
+		while (!LOG_WORKER.isAlive()) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException ignore) {
+			}
+		}
+		logWorkerActive = true;
 	}
 
 	public static void stopLogWorker() {
