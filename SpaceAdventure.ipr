@@ -153,6 +153,13 @@
   <component name="ProjectCodeStyleConfiguration">
     <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="ryan.palmer">
+      <words>
+        <w>shaders</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/spaceadventure.iml" filepath="$PROJECT_DIR$/spaceadventure.iml" />

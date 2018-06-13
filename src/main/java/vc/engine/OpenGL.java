@@ -14,36 +14,33 @@ import static org.lwjgl.opengl.GL11.GL_VERSION;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-public class GLContext {
+public class OpenGL {
+	private static final int OPEN_GL_MAJOR_VERSION = 3;
+	private static final int OPEN_GL_MINOR_VERSION = 2;
+
 	private final GameSettings settings;
 
 	private String title;
 	private long window;
-	private boolean legacy;
 
-	public GLContext(GameSettings settings, String title) {
+	public OpenGL(GameSettings settings, String title) {
 		this.settings = settings;
 		this.title = title;
 	}
 
 	public boolean init() {
 		glfwSetErrorCallback(this::handleErrorCallback);
-		if (!glfwInit()) throw new IllegalStateException("Unable to initialize GLFW");
+		if (!glfwInit()) throw new IllegalStateException("Unable to initialize OpenGL");
 		glfwDefaultWindowHints(); // optional, the current window hints are already the default
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPEN_GL_MAJOR_VERSION);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPEN_GL_MINOR_VERSION);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		window = glfwCreateWindow(settings.screenX, settings.screenY, title, settings.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
 		if (window == NULL) {
-			Log.info("Falling back to legacy OpenGL context.");
-			legacy = true;
-			glfwDefaultWindowHints();
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-			window = glfwCreateWindow(settings.screenX, settings.screenY, title, NULL, NULL);
-			if (window == NULL) throw new RuntimeException("Failed to create the GLFW window");
+			Log.error("Failed to create the OpenGL window. Current graphics processor may be unsupported.");
+			return false;
 		}
 
 		glfwSetKeyCallback(window, this::handleKeyCallback);
@@ -62,7 +59,7 @@ public class GLContext {
 		glfwShowWindow(window);
 		GL.createCapabilities();
 		Log.info("OpenGL initialized. Version: " + glGetString(GL_VERSION));
-		return legacy;
+		return true;
 	}
 
 	private final void handleKeyCallback(long window, int key, int scancode, int action, int mods) {
@@ -81,17 +78,15 @@ public class GLContext {
 		glfwPollEvents(); // Can do glfwWaitEvents() to wait for input instead
 	}
 
-	public boolean isLegacy() {
-		return legacy;
-	}
-
 	public boolean shouldClose() {
 		return glfwWindowShouldClose(window);
 	}
 
 	public void close() {
-		glfwFreeCallbacks(window);
-		glfwDestroyWindow(window);
+		if (window != NULL) {
+			glfwFreeCallbacks(window);
+			glfwDestroyWindow(window);
+		}
 		glfwTerminate();
 		Log.info("OpenGL terminated.");
 	}

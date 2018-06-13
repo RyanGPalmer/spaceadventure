@@ -1,99 +1,72 @@
 package vc.engine;
 
-import vc.engine.math.Matrix4;
+import vc.engine.util.FileUtils;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
+import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
+import static org.lwjgl.opengl.GL30.glClearBufferfv;
+import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
 public class Renderer {
+	private static final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
+	private static final float[] WHITE = {1.0f, 1.0f, 1.0f, 1.0f};
+	private static final float[] RED = {1.0f, 0.0f, 0.0f, 1.0f};
+	private static final float[] GREEN = {0.0f, 1.0f, 0.0f, 1.0f};
+	private static final float[] BLUE = {0.0f, 0.0f, 1.0f, 1.0f};
 
-	private final GLContext gl;
-
-	private VertexArrayObject vao;
-	private VertexBufferObject vbo;
+	private final OpenGL gl;
 	private ShaderProgram sp;
-	private int posLoc, colLoc;
+	private VertexArrayObject vao;
 
-	float angle = 0f;
-	float[] pyramidData = {
-			-0.5f, 0, 0.5f, 1, 0, 0,
-			0, 0.5f, 0f, 0, 1, 0,
-			0.5f, 0, 0.5f, 0, 0, 1
-	};
-
-	public Renderer(GLContext gl) {
+	public Renderer(OpenGL gl) {
 		this.gl = gl;
 	}
 
-	public void init() {
-		glEnable(GL_TEXTURE_2D);
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		vao = VertexArrayObject.create();
-		vbo = VertexBufferObject.create();
+	public boolean init() {
+		String vertShaderSrc = FileUtils.read(Shader.DEFAULT_VERTEX_SHADER_PATH);
+		String geoShaderSrc = FileUtils.read(Shader.DEFAULT_GEOMETRY_SHADER_PATH);
+		String fragShaderSrc = FileUtils.read(Shader.DEFAULT_FRAGMENT_SHADER_PATH);
 
-		Shader v = Shader.create(GL_VERTEX_SHADER, gl.isLegacy());
-		Shader f = Shader.create(GL_FRAGMENT_SHADER, gl.isLegacy());
-		sp = ShaderProgram.create(gl.isLegacy(), v, f);
-		if (!gl.isLegacy()) sp.bindFragDataLocation(0, "fragColor");
-		sp.link();
-		sp.use();
+		if (vertShaderSrc == null || geoShaderSrc == null || fragShaderSrc == null) {
+			Log.error("Failed to load one or more shader source files.");
+			return false;
+		}
 
-		vbo.upload(pyramidData);
+		try {
+			sp = new ShaderProgram();
+			Shader vertShader = new Shader(GL_VERTEX_SHADER, vertShaderSrc);
+			Shader geoShader = new Shader(GL_GEOMETRY_SHADER, geoShaderSrc);
+			Shader fragShader = new Shader(GL_FRAGMENT_SHADER, fragShaderSrc);
+			sp.attachShader(vertShader);
+			//sp.attachShader(geoShader);
+			sp.attachShader(fragShader);
+			sp.linkAndDiscardShaders();
+		} catch (ShaderException e) {
+			Log.error("Shader creation failed.", e);
+			return false;
+		}
 
-		posLoc = sp.getAttributeLocation("position");
-		colLoc = sp.getAttributeLocation("color");
-		sp.enableVertexAttribute(posLoc);
-		sp.enableVertexAttribute(colLoc);
-		sp.pointVertexAttribute(posLoc, 3, 6 * GL_FLOAT, 0);
-		sp.pointVertexAttribute(colLoc, 3, 6 * GL_FLOAT, 3 * GL_FLOAT);
+		vao = new VertexArrayObject();
+		vao.setOffset(0, 0, 0, 0);
+		vao.setColor(WHITE);
 
-		setUniforms();
 		Log.info("Renderer initialized.");
-	}
-
-	private void setUniforms() {
-		sp.setUniform("model", new Matrix4());
-		sp.setUniform("view", new Matrix4());
-		float ratio = (float) gl.getScreenX() / (float) gl.getScreenY();
-		sp.setUniform("projection", Matrix4.orthographic(-ratio, ratio, -1f, 1f, -1f, 1f));
+		return true;
 	}
 
 	public void render() {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		if (gl.isLegacy()) renderLegacy();
-		else renderNormal();
+		glClearBufferfv(GL_COLOR, 0, BLACK);
+		sp.use();
+		vao.bind();
+		glPointSize(60);
+		glDrawArrays(GL_TRIANGLES, 0, 9);
 		gl.swapAndPoll();
 	}
 
-	private void renderNormal() {
-		renderPyramid();
-	}
-
-	private void renderLegacy() {
-		glBegin(GL_QUADS);
-		glTexCoord2f(0, 0);
-		glVertex2f(-1, -1);
-		glTexCoord2f(0, 1);
-		glVertex2f(-1, 1);
-		glTexCoord2f(1, 1);
-		glVertex2f(1, 1);
-		glTexCoord2f(1, 0);
-		glVertex2f(1, -1);
-		glEnd();
-	}
-
 	public void close() {
-		vao.delete();
-		vbo.delete();
-		sp.delete();
+		if (sp != null) sp.delete();
+		if (vao != null) vao.delete();
 		Log.info("Renderer closed.");
-	}
-
-	public void renderPyramid() {
-		sp.enableVertexAttribute(posLoc);
-		sp.enableVertexAttribute(colLoc);
-		glDrawArrays(GL_TRIANGLES, 0, 18);
-		sp.disableVertexAttribute(posLoc);
-		sp.disableVertexAttribute(colLoc);
 	}
 }

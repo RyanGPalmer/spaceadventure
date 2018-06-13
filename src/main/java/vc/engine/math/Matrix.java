@@ -35,7 +35,7 @@ public class Matrix {
 		} else {
 			int size = vectors.length;
 			matrix = new float[size][size];
-			for (int i = 0; i < size; i++) matrix[i] = vectors[i].getDimensions();
+			for (int i = 0; i < size; i++) matrix[i] = vectors[i].toArray();
 		}
 	}
 

@@ -1,19 +1,20 @@
 package vc.engine;
 
+import vc.engine.math.Vector4;
+
+import static org.lwjgl.opengl.GL20.glVertexAttrib4fv;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glDeleteVertexArrays;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
 public class VertexArrayObject {
+	private static final int ATTRIB_LOCATION_OFFSET = 0;
+	private static final int ATTRIB_LOCATION_COLOR = 1;
+
 	private final int id;
 
-	private VertexArrayObject() {
+	public VertexArrayObject() {
 		id = glGenVertexArrays();
-		bind();
-	}
-
-	public static VertexArrayObject create() {
-		return new VertexArrayObject();
 	}
 
 	public void bind() {
@@ -24,7 +25,11 @@ public class VertexArrayObject {
 		glDeleteVertexArrays(id);
 	}
 
-	public int getID() {
-		return id;
+	public void setOffset(float... offset) {
+		glVertexAttrib4fv(ATTRIB_LOCATION_OFFSET, offset);
+	}
+
+	public void setColor(float... color) {
+		glVertexAttrib4fv(ATTRIB_LOCATION_COLOR, color);
 	}
 }

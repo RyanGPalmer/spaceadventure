@@ -92,7 +92,7 @@ public class Vector {
 
 	public static boolean equals(Vector... vectors) {
 		if (!checkCompatibility(vectors)) return false;
-		float[] dimensions = vectors[0].getDimensions();
+		float[] dimensions = vectors[0].toArray();
 		for (int i = 1; i < vectors.length; i++)
 			for (int j = 0; j < dimensions.length; j++) if (dimensions[j] != vectors[i].get(j)) return false;
 		return true;
@@ -146,7 +146,7 @@ public class Vector {
 		} else return dimensions[dimension];
 	}
 
-	public float[] getDimensions() {
+	public float[] toArray() {
 		return dimensions;
 	}
 
