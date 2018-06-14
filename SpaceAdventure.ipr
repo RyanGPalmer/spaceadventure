@@ -170,14 +170,14 @@
   </component>
   <component name="ProjectRunConfigurationManager">
     <configuration default="false" name="Main (Mac)" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="vc.game.SpaceAdventure" />
+      <option name="MAIN_CLASS_NAME" value="game.SpaceAdventure" />
       <module name="spaceadventure" />
       <option name="VM_PARAMETERS" value="-XstartOnFirstThread" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <method />
     </configuration>
     <configuration default="false" name="Main" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="vc.game.SpaceAdventure" />
+      <option name="MAIN_CLASS_NAME" value="game.SpaceAdventure" />
       <module name="spaceadventure" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <method>

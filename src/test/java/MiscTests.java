@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import vc.engine.math.Matrix;
-import vc.engine.math.Vector;
-import vc.game.world.Coordinates;
-import vc.game.world.environment.Environment;
-import vc.game.world.Planet;
-import vc.game.world.Seed;
+import vicinity.math.Matrix;
+import vicinity.math.Vector;
+import game.world.Coordinates;
+import game.world.environment.Environment;
+import game.world.Planet;
+import game.world.Seed;
 
 import org.junit.jupiter.api.Test;
 
