@@ -1,17 +1,17 @@
 package vc.engine;
 
+import vc.engine.util.TimeUtils;
+
 import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import vc.game.utilities.Util;
-
 public final class Log {
 	private static final String LOG_FILE_NAME = "runtime.log";
-	private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	private static final String DIV = " - ";
+	private static final String INDENT = "   ";
 	private static final String LOG_ERROR = "ERROR - ";
 	private static final String LOG_WARN = "Warning - ";
 	private static final String LOG_UNCAUGHT = "UNCAUGHT EXCEPTION - ";
@@ -66,10 +66,8 @@ public final class Log {
 	}
 
 	private static void log(String message) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
-		String dateTime = dtf.format(LocalDateTime.now()) + '.' + getCurrentSecondMillis();
 		String thread = Thread.currentThread().getName();
-		addLineToLogBuffer(dateTime + DIV + thread + DIV + message);
+		addToLogBuffer(TimeUtils.getTimestamp() + DIV + thread + DIV + message);
 	}
 
 	public static void info(String message) {
@@ -81,8 +79,7 @@ public final class Log {
 	}
 
 	public static void error(String message, Throwable e) {
-		error(message);
-		exception(e);
+		error(message + '\n' + e.toString() + getStackTrace(e));
 	}
 
 	public static void warn(String message) {
@@ -93,17 +90,14 @@ public final class Log {
 		error(LOG_UNCAUGHT + e.toString() + getStackTrace(e));
 	}
 
-	private static void exception(Throwable e) {
-		addLineToLogBuffer(e.toString() + getStackTrace(e));
-	}
-
 	public static void interrupt() {
 		warn(LOG_INTERRUPT_MESSAGE);
 	}
 
-	private static void addLineToLogBuffer(String line) {
+	private static void addToLogBuffer(String text) {
+		text = text.replace("\n", '\n' + INDENT);
 		synchronized (LOG_MUTEX) {
-			LOG_BUFFER.add(line);
+			LOG_BUFFER.add(text);
 		}
 	}
 
@@ -113,8 +107,7 @@ public final class Log {
 			fw.write(text);
 			fw.close();
 		} catch (Exception e) {
-			error("Failed to write logs to file.");
-			exception(e);
+			error("Failed to write logs to file.", e);
 		}
 
 		System.out.print(text);
@@ -123,13 +116,7 @@ public final class Log {
 	public static String getStackTrace(Throwable e) {
 		String stackTrace = "";
 		for (StackTraceElement st : e.getStackTrace())
-			stackTrace += "\n\t" + st.getClassName() + '.' + st.getMethodName() + '(' + st.getFileName() + ':' + st.getLineNumber() + ')';
+			stackTrace += '\n' + st.getClassName() + '.' + st.getMethodName() + '(' + st.getFileName() + ':' + st.getLineNumber() + ')';
 		return stackTrace;
-	}
-
-	public static String getCurrentSecondMillis() {
-		String currentTimeMillis = "" + System.currentTimeMillis();
-		if (currentTimeMillis.length() <= 3) return currentTimeMillis;
-		return currentTimeMillis.substring(currentTimeMillis.length() - 3, currentTimeMillis.length());
 	}
 }

@@ -18,6 +18,11 @@ public class Renderer {
 	private final OpenGL gl;
 	private ShaderProgram sp;
 	private VertexArrayObject vao;
+	private VertexBufferObject vbo;
+	private static final float[] vertices = {
+			0.25f, -0.25f, 0.5f,
+			-0.25f, -0.25f, 0.5f,
+			0.25f, 0.25f, 0.5f};
 
 	public Renderer(OpenGL gl) {
 		this.gl = gl;
@@ -51,6 +56,11 @@ public class Renderer {
 		vao.setOffset(0, 0, 0, 0);
 		vao.setColor(WHITE);
 
+		vbo = new VertexBufferObject();
+		vbo.bind();
+
+		vbo.buffer(vertices);
+
 		Log.info("Renderer initialized.");
 		return true;
 	}
@@ -59,14 +69,14 @@ public class Renderer {
 		glClearBufferfv(GL_COLOR, 0, BLACK);
 		sp.use();
 		vao.bind();
-		glPointSize(60);
-		glDrawArrays(GL_TRIANGLES, 0, 9);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 		gl.swapAndPoll();
 	}
 
 	public void close() {
 		if (sp != null) sp.delete();
 		if (vao != null) vao.delete();
+		if (vbo != null) vbo.delete();
 		Log.info("Renderer closed.");
 	}
 }

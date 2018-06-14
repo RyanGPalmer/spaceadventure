@@ -1,6 +1,7 @@
 package vc.engine;
 
 import vc.engine.util.FileUtils;
+import vc.engine.util.TextUtils;
 
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
@@ -45,7 +46,7 @@ public final class Shader {
 		int status = glGetShaderi(id, GL_COMPILE_STATUS);
 		if (status == GL_FALSE) {
 			String info = glGetShaderInfoLog(id);
-			throw new ShaderException("Failed to compile shader. (Type: " + getReadableTypeName(type) + ")\n" + info + "--- SHADER SOURCE SNIPPET START ---\n" + source + "--- SHADER SOURCE SNIPPET END ---");
+			throw new ShaderException("Failed to compile " + getReadableTypeName(type) + " shader.\n" + info + TextUtils.formatSourceCodeSnippet(source));
 		}
 	}
 
