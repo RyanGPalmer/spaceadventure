@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class OpenGL {
 	private static final int OPEN_GL_MAJOR_VERSION = 3;
-	private static final int OPEN_GL_MINOR_VERSION = 2;
+	private static final int OPEN_GL_MINOR_VERSION = 3;
 
 	private final GameSettings settings;
 
@@ -39,7 +39,7 @@ public class OpenGL {
 		window = glfwCreateWindow(settings.screenX, settings.screenY, title, settings.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
 		if (window == NULL) {
-			Log.error("Failed to create the OpenGL window. Current graphics processor may be unsupported.");
+			Log.error("Failed to create the OpenGL window.");
 			return false;
 		}
 
