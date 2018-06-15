@@ -8,7 +8,7 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
 public final class Shader {
-	private static final String SHADER_FILE_EXTENSION = "shd";
+	private static final String SHADER_FILE_EXTENSION = "glsl";
 	private static final String SHADER_FOLDER_NAME = "shaders";
 	private static final int VERTEX_SHADER_CODE = 0;
 	private static final int GEOMETRY_SHADER_CODE = 1;
