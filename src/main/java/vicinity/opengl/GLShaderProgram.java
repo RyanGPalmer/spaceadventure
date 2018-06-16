@@ -1,16 +1,16 @@
-package vicinity;
+package vicinity.opengl;
 
 import static org.lwjgl.opengl.GL20.*;
 
-public final class ShaderProgram {
+public final class GLShaderProgram {
 	private final int id;
 	private final int[] shaders = new int[3]; // Room for a vertex, geometry, and fragment shader
 
-	public ShaderProgram() {
+	public GLShaderProgram() {
 		id = glCreateProgram();
 	}
 
-	public void attachShader(Shader shader) {
+	public void attachShader(GLShader shader) {
 		int shaderID = shader.getID();
 		glAttachShader(id, shaderID);
 		shaders[shader.getType()] = shaderID;

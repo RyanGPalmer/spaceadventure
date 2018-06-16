@@ -1,9 +1,11 @@
-package vicinity;
+package vicinity.opengl;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import vicinity.GameSettings;
+import vicinity.Log;
 
 import java.nio.IntBuffer;
 

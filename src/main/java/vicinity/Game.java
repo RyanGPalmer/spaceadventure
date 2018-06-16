@@ -1,5 +1,7 @@
 package vicinity;
 
+import vicinity.opengl.GLRenderer;
+import vicinity.opengl.OpenGL;
 import vicinity.util.DataSerializer;
 import vicinity.util.TickTimer;
 
@@ -10,7 +12,7 @@ public abstract class Game {
 
 	private final TickTimer timer;
 	private final OpenGL gl;
-	private final Renderer renderer;
+	private final GLRenderer renderer;
 
 	protected Game(final String title) {
 		Thread.currentThread().setName(MAIN_THREAD);
@@ -20,7 +22,7 @@ public abstract class Game {
 		if (settings == null) settings = GameSettings.getDefault();
 		timer = new TickTimer(settings.tickRate);
 		gl = new OpenGL(settings, title);
-		renderer = new Renderer(gl);
+		renderer = new GLRenderer(gl);
 	}
 
 	protected final void start() {

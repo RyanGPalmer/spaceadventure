@@ -1,4 +1,4 @@
-package vicinity;
+package vicinity.opengl;
 
 import vicinity.util.FileUtils;
 import vicinity.util.TextUtils;
@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
-public final class Shader {
+public final class GLShader {
 	private static final String SHADER_FILE_EXTENSION = "glsl";
 	private static final String SHADER_FOLDER_NAME = "shaders";
 	private static final int VERTEX_SHADER_CODE = 0;
@@ -25,7 +25,7 @@ public final class Shader {
 	private final int type;
 	private final String source;
 
-	public Shader(int type, String source) throws ShaderException {
+	public GLShader(int type, String source) throws GLShaderException {
 		id = glCreateShader(type);
 		this.type = simplifyTypeCode(type);
 		this.source = source;
@@ -42,11 +42,11 @@ public final class Shader {
 		return type;
 	}
 
-	private void checkCompilation() throws ShaderException {
+	private void checkCompilation() throws GLShaderException {
 		int status = glGetShaderi(id, GL_COMPILE_STATUS);
 		if (status == GL_FALSE) {
 			String info = glGetShaderInfoLog(id);
-			throw new ShaderException("Failed to compile " + getReadableTypeName(type) + " shader.\n" + info + TextUtils.formatSourceCodeSnippet(source));
+			throw new GLShaderException("Failed to compile " + getReadableTypeName(type) + " shader.\n" + info + TextUtils.formatSourceCodeSnippet(source));
 		}
 	}
 
@@ -63,7 +63,7 @@ public final class Shader {
 		}
 	}
 
-	private static int simplifyTypeCode(int type) throws ShaderException {
+	private static int simplifyTypeCode(int type) throws GLShaderException {
 		switch (type) {
 			case GL_VERTEX_SHADER:
 				return VERTEX_SHADER_CODE;
@@ -72,7 +72,7 @@ public final class Shader {
 			case GL_FRAGMENT_SHADER:
 				return FRAGMENT_SHADER_CODE;
 			default:
-				throw new ShaderException("Unable to interpret shader type code: " + type);
+				throw new GLShaderException("Unable to interpret shader type code: " + type);
 		}
 	}
 }

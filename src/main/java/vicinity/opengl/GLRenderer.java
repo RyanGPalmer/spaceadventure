@@ -1,5 +1,8 @@
-package vicinity;
+package vicinity.opengl;
 
+import vicinity.Log;
+import vicinity.opengl.buffers.GLElementBufferObject;
+import vicinity.opengl.buffers.GLVertexBufferObject;
 import vicinity.util.FileUtils;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -7,7 +10,7 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.glClearBufferfv;
 import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
-public class Renderer {
+public class GLRenderer {
 	private static final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
 	private static final float[] WHITE = {1.0f, 1.0f, 1.0f, 1.0f};
 	private static final float[] RED = {1.0f, 0.0f, 0.0f, 1.0f};
@@ -15,11 +18,11 @@ public class Renderer {
 	private static final float[] BLUE = {0.0f, 0.0f, 1.0f, 1.0f};
 
 	private final OpenGL gl;
-	private ShaderProgram sp;
+	private GLShaderProgram sp;
 
-	private VertexArrayObject vao;
-	private VertexBufferObject vbo;
-	private ElementBufferObject ebo;
+	private GLVertexArrayObject vao;
+	private GLVertexBufferObject vbo;
+	private GLElementBufferObject ebo;
 
 	private static final float[] vertices = {
 			0.6f, 0.6f, 0.0f,    // top right
@@ -32,14 +35,14 @@ public class Renderer {
 			1, 2, 3        // second triangle
 	};
 
-	public Renderer(OpenGL gl) {
+	public GLRenderer(OpenGL gl) {
 		this.gl = gl;
 	}
 
 	public boolean init() {
-		String vertShaderSrc = FileUtils.read(Shader.DEFAULT_VERTEX_SHADER_PATH);
-		String geoShaderSrc = FileUtils.read(Shader.DEFAULT_GEOMETRY_SHADER_PATH);
-		String fragShaderSrc = FileUtils.read(Shader.DEFAULT_FRAGMENT_SHADER_PATH);
+		String vertShaderSrc = FileUtils.read(GLShader.DEFAULT_VERTEX_SHADER_PATH);
+		String geoShaderSrc = FileUtils.read(GLShader.DEFAULT_GEOMETRY_SHADER_PATH);
+		String fragShaderSrc = FileUtils.read(GLShader.DEFAULT_FRAGMENT_SHADER_PATH);
 
 		if (vertShaderSrc == null || geoShaderSrc == null || fragShaderSrc == null) {
 			Log.error("Failed to load one or more shader source files.");
@@ -47,35 +50,29 @@ public class Renderer {
 		}
 
 		try {
-			sp = new ShaderProgram();
-			Shader vertShader = new Shader(GL_VERTEX_SHADER, vertShaderSrc);
-			Shader geomShader = new Shader(GL_GEOMETRY_SHADER, geoShaderSrc);
-			Shader fragShader = new Shader(GL_FRAGMENT_SHADER, fragShaderSrc);
+			sp = new GLShaderProgram();
+			GLShader vertShader = new GLShader(GL_VERTEX_SHADER, vertShaderSrc);
+			GLShader geomShader = new GLShader(GL_GEOMETRY_SHADER, geoShaderSrc);
+			GLShader fragShader = new GLShader(GL_FRAGMENT_SHADER, fragShaderSrc);
 			sp.attachShader(vertShader);
 			//sp.attachShader(geomShader);
 			sp.attachShader(fragShader);
 			sp.linkAndDiscardShaders();
-		} catch (ShaderException e) {
+			sp.use();
+		} catch (GLShaderException e) {
 			Log.error("Shader creation failed.", e);
 			return false;
 		}
 
-		vao = new VertexArrayObject();
+		vao = new GLVertexArrayObject();
+		vbo = new GLVertexBufferObject();
+		ebo = new GLElementBufferObject();
 		vao.bind();
-
-		vbo = new VertexBufferObject();
 		vbo.bind();
-		vbo.bufferStatic(vertices);
-
-		ebo = new ElementBufferObject();
 		ebo.bind();
-		ebo.bufferStatic(indices);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * 4, 0);
 		glEnableVertexAttribArray(0);
-
-		vao.unbind();
-		vbo.unbind();
 
 		Log.info("Renderer initialized.");
 		return true;
@@ -83,10 +80,16 @@ public class Renderer {
 
 	public void render() {
 		glClearBufferfv(GL_COLOR, 0, BLACK);
-		sp.use();
-		vao.bind();
+		buffer();
+		//vao.bind();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		gl.swapAndPoll();
+	}
+
+	public void buffer() {
+		for (int i = 0; i < vertices.length; i++) vertices[i] += 0.001f;
+		vbo.bufferStatic(vertices);
+		ebo.bufferStatic(indices);
 	}
 
 	public void close() {
