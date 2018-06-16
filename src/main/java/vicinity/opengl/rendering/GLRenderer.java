@@ -1,10 +1,21 @@
-package vicinity.opengl;
+package vicinity.opengl.rendering;
 
 import vicinity.Log;
+import vicinity.math.Vector;
+import vicinity.math.Vector3;
 import vicinity.opengl.buffers.GLElementBufferObject;
 import vicinity.opengl.buffers.GLVertexBufferObject;
+import vicinity.opengl.glfw.GLFWWindow;
+import vicinity.opengl.shaders.GLShader;
+import vicinity.opengl.shaders.GLShaderException;
+import vicinity.opengl.shaders.GLShaderProgram;
 import vicinity.util.FileUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.glClearBufferfv;
@@ -12,31 +23,36 @@ import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
 public class GLRenderer {
 	private static final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
-	private static final float[] WHITE = {1.0f, 1.0f, 1.0f, 1.0f};
-	private static final float[] RED = {1.0f, 0.0f, 0.0f, 1.0f};
-	private static final float[] GREEN = {0.0f, 1.0f, 0.0f, 1.0f};
-	private static final float[] BLUE = {0.0f, 0.0f, 1.0f, 1.0f};
+	private static final Vector3 WHITE = new Vector3(1.0f, 1.0f, 1.0f);
+	private static final Vector3 RED = new Vector3(1.0f, 0.0f, 0.0f);
+	private static final Vector3 GREEN = new Vector3(0.0f, 1.0f, 0.0f);
+	private static final Vector3 BLUE = new Vector3(0.0f, 0.0f, 1.0f);
 
-	private final OpenGL gl;
+	private final GLFWWindow window;
+
 	private GLShaderProgram sp;
-
 	private GLVertexArrayObject vao;
-	private GLVertexBufferObject vbo;
 	private GLElementBufferObject ebo;
+	private GLVertexBufferObject vbo;
 
-	private static final float[] vertices = {
-			0.6f, 0.6f, 0.0f,    // top right
-			0.5f, -0.5f, 0.0f,    // bottom right
-			-0.5f, -0.5f, 0.0f,    // bottom left
-			-0.5f, 0.5f, 0.0f    // top left
-	};
 	private static final int[] indices = {
-			0, 2, 3,    // first triangle
+			0, 1, 3,    // first triangle
 			1, 2, 3        // second triangle
 	};
 
-	public GLRenderer(OpenGL gl) {
-		this.gl = gl;
+	private static final Vector3[] vertices = {
+			new Vector3(0.5f, 0.5f, 0.0f),    // top right
+			RED,
+			new Vector3(0.5f, -0.5f, 0.0f),    // bottom right
+			GREEN,
+			new Vector3(-0.5f, -0.5f, 0.0f),    // bottom left
+			BLUE,
+			new Vector3(-0.5f, 0.5f, 0.0f),    // top left
+			WHITE
+	};
+
+	public GLRenderer(GLFWWindow window) {
+		this.window = window;
 	}
 
 	public boolean init() {
@@ -65,14 +81,15 @@ public class GLRenderer {
 		}
 
 		vao = new GLVertexArrayObject();
-		vbo = new GLVertexBufferObject();
 		ebo = new GLElementBufferObject();
 		vao.bind();
-		vbo.bind();
 		ebo.bind();
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * 4, 0);
-		glEnableVertexAttribArray(0);
+		vbo = new GLVertexBufferObject();
+		vbo.point(0, 0, 6);
+		vbo.point(1, 3, 6);
+
+		vao.unbind();
 
 		Log.info("Renderer initialized.");
 		return true;
@@ -81,14 +98,15 @@ public class GLRenderer {
 	public void render() {
 		glClearBufferfv(GL_COLOR, 0, BLACK);
 		buffer();
-		//vao.bind();
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		gl.swapAndPoll();
+		vao.drawElements();
+		glfwSwapBuffers(window.getID());
 	}
 
 	public void buffer() {
-		for (int i = 0; i < vertices.length; i++) vertices[i] += 0.001f;
-		vbo.bufferStatic(vertices);
+		float[] data = new float[vertices.length * 3];
+		int pointer = 0;
+		for (Vector3 v : vertices) for (float f : v.toArray()) data[pointer++] = f;
+		vbo.bufferStatic(data);
 		ebo.bufferStatic(indices);
 	}
 

@@ -7,9 +7,5 @@ public abstract class GLObject {
 		this.id = id;
 	}
 
-	public abstract void bind();
-
-	public abstract void unbind();
-
 	public abstract void delete();
 }

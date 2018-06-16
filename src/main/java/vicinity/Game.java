@@ -1,6 +1,6 @@
 package vicinity;
 
-import vicinity.opengl.GLRenderer;
+import vicinity.opengl.rendering.GLRenderer;
 import vicinity.opengl.OpenGL;
 import vicinity.util.DataSerializer;
 import vicinity.util.TickTimer;
@@ -22,7 +22,7 @@ public abstract class Game {
 		if (settings == null) settings = GameSettings.getDefault();
 		timer = new TickTimer(settings.tickRate);
 		gl = new OpenGL(settings, title);
-		renderer = new GLRenderer(gl);
+		renderer = new GLRenderer(gl.getWindow());
 	}
 
 	protected final void start() {
@@ -46,6 +46,7 @@ public abstract class Game {
 			timer.update();
 			if (timer.shouldTick()) tick(timer.onTick());
 			renderer.render();
+			gl.pollEvents();
 		}
 	}
 
@@ -55,7 +56,7 @@ public abstract class Game {
 
 	private final void clean() {
 		if (timer != null) timer.stop();
-		if (GAME_OBJECT_MANAGER != null) GAME_OBJECT_MANAGER.clean();
+		GAME_OBJECT_MANAGER.clean();
 		if (renderer != null) renderer.close();
 		if (gl != null) {
 			gl.close();

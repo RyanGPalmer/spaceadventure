@@ -1,5 +1,6 @@
-package vicinity.opengl;
+package vicinity.opengl.shaders;
 
+import vicinity.opengl.GLObject;
 import vicinity.util.FileUtils;
 import vicinity.util.TextUtils;
 
@@ -7,7 +8,7 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
-public final class GLShader {
+public final class GLShader extends GLObject {
 	private static final String SHADER_FILE_EXTENSION = "glsl";
 	private static final String SHADER_FOLDER_NAME = "shaders";
 	private static final int VERTEX_SHADER_CODE = 0;
@@ -21,12 +22,11 @@ public final class GLShader {
 	public static final String DEFAULT_GEOMETRY_SHADER_PATH = FileUtils.buildFilePath(GEOMETRY_SHADER_NAME, SHADER_FILE_EXTENSION, "res", SHADER_FOLDER_NAME);
 	public static final String DEFAULT_FRAGMENT_SHADER_PATH = FileUtils.buildFilePath(FRAGMENT_SHADER_NAME, SHADER_FILE_EXTENSION, "res", SHADER_FOLDER_NAME);
 
-	private final int id;
 	private final int type;
 	private final String source;
 
 	public GLShader(int type, String source) throws GLShaderException {
-		id = glCreateShader(type);
+		super(glCreateShader(type));
 		this.type = simplifyTypeCode(type);
 		this.source = source;
 		glShaderSource(id, source);
@@ -74,5 +74,9 @@ public final class GLShader {
 			default:
 				throw new GLShaderException("Unable to interpret shader type code: " + type);
 		}
+	}
+
+	public void delete() {
+		glDeleteShader(id);
 	}
 }
