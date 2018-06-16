@@ -109,8 +109,6 @@ public final class Log {
 		} catch (Exception e) {
 			error("Failed to write logs to file.", e);
 		}
-
-		System.out.print(text);
 	}
 
 	public static String getStackTrace(Throwable e) {
