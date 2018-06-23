@@ -26,21 +26,30 @@ public final class Log {
 	private Log() {
 	}
 
-	public static void startLogWorker() {
+	public static void start() {
+		logWorkerActive = true;
 		LOG_WORKER.setName(LOG_WORKER_NAME);
 //		LOG_WORKER.setUncaughtExceptionHandler(Game.UNCAUGHT_EXCEPTION_HANDLER);
 		LOG_WORKER.start();
 		while (!LOG_WORKER.isAlive()) {
 			try {
-				Thread.sleep(500);
+				Thread.sleep(100);
 			} catch (InterruptedException ignore) {
 			}
 		}
-		logWorkerActive = true;
 	}
 
-	public static void stopLogWorker() {
+	public static void stop() {
+		if (!logWorkerActive) return;
 		logWorkerActive = false;
+		LOG_WORKER.interrupt();
+		while (LOG_WORKER.isAlive()) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException ignore) {
+			}
+		}
+		checkLogBufferAndWriteNewEntries();
 	}
 
 	private static void runLogWorkerActivities() {
@@ -48,7 +57,6 @@ public final class Log {
 			try {
 				Thread.sleep(LOG_WRITE_INTERVAL);
 			} catch (InterruptedException e) {
-				Log.interrupt();
 			}
 			checkLogBufferAndWriteNewEntries();
 		}

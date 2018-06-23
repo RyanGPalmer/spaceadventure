@@ -48,10 +48,6 @@ public class GLFWWindow {
 		return id != NULL;
 	}
 
-	public long getID() {
-		return id;
-	}
-
 	public void show() {
 		glfwShowWindow(id);
 	}
@@ -62,6 +58,10 @@ public class GLFWWindow {
 
 	public boolean shouldClose() {
 		return glfwWindowShouldClose(id);
+	}
+
+	public void swapBuffers() {
+		glfwSwapBuffers(id);
 	}
 
 	public void destroy() {

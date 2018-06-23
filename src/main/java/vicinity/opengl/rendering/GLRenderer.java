@@ -1,7 +1,6 @@
 package vicinity.opengl.rendering;
 
 import vicinity.Log;
-import vicinity.math.Vector;
 import vicinity.math.Vector3;
 import vicinity.opengl.buffers.GLElementBufferObject;
 import vicinity.opengl.buffers.GLVertexBufferObject;
@@ -10,10 +9,6 @@ import vicinity.opengl.shaders.GLShader;
 import vicinity.opengl.shaders.GLShaderException;
 import vicinity.opengl.shaders.GLShaderProgram;
 import vicinity.util.FileUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.opengl.GL11.*;
@@ -99,7 +94,7 @@ public class GLRenderer {
 		glClearBufferfv(GL_COLOR, 0, BLACK);
 		buffer();
 		vao.drawElements();
-		glfwSwapBuffers(window.getID());
+		window.swapBuffers();
 	}
 
 	public void buffer() {
