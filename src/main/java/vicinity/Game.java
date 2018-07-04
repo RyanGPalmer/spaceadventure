@@ -18,7 +18,7 @@ public abstract class Game {
 	protected Game(final String title) {
 		Thread.currentThread().setName(MAIN_THREAD);
 		Log.info("SYSTEM STARTUP");
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> shutdown(), "ShutdownHook"));
+		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown, "ShutdownHook"));
 		Log.start();
 		GameSettings settings = new DataSerializer<GameSettings>(SETTINGS_FILE_PATH).load();
 		Log.info(settings != null ? "Settings loaded." : "Settings not loaded. New settings generated.");

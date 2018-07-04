@@ -182,5 +182,4 @@ public class Matrix4 extends Matrix {
 
 		return scaling;
 	}
-
 }

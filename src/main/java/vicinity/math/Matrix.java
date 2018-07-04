@@ -6,36 +6,39 @@ import java.nio.FloatBuffer;
 
 /**
  * Generic matrix capable of representing any n-dimensional matrix.
+ * <p>
+ * OpenGL uses column-major ordering, so this class uses the same.
  *
  * @author Ryan Palmer
  */
 public class Matrix {
-	private float[][] matrix;
+	private float[] matrix;
 
 	public Matrix(int size) {
-		matrix = new float[size][size];
+		matrix = new float[size * size];
 		setIdentity();
 	}
 
 	public Matrix(Matrix m) {
 		int size = m.getSize();
-		matrix = new float[size][size];
-		for (int r = 0; r < size; r++) for (int c = 0; c < size; c++) matrix[r][c] = m.matrix[r][c];
+		matrix = new float[size * size];
+		for (int i = 0; i < size * size; i++) matrix[i] = m.matrix[i];
 	}
 
 	public Matrix(Vector... vectors) {
 		if (!Vector.checkCompatibility(vectors)) {
 			Log.error("Tried to construct matrix from incompatible vectors.", new RuntimeException());
-			matrix = new float[3][3];
+			matrix = new float[4 * 4];
 			setIdentity();
 		} else if (vectors.length != vectors[0].getSize()) {
 			Log.error("Tried to construct " + vectors.length + "-dimensional matrix with " + vectors[0].getSize() + "-dimensional vectors.", new RuntimeException());
-			matrix = new float[3][3];
+			matrix = new float[4 * 4];
 			setIdentity();
 		} else {
 			int size = vectors.length;
-			matrix = new float[size][size];
-			for (int i = 0; i < size; i++) matrix[i] = vectors[i].toArray();
+			matrix = new float[size * size];
+			for (int r = 0; r < size; r++)
+				for (int c = 0; c < size; c++) matrix[c * size + r] = vectors[r].toArray()[c];
 		}
 	}
 
@@ -62,7 +65,7 @@ public class Matrix {
 		float[] dimensions = new float[size];
 		for (int r = 0; r < size; r++) {
 			float row = 0;
-			for (int c = 0; c < size; c++) row += m.matrix[r][c] * v.get(c);
+			for (int c = 0; c < size; c++) row += m.matrix[c * size + r] * v.get(c);
 			dimensions[r] = row;
 		}
 		return new Vector(dimensions);
@@ -107,17 +110,16 @@ public class Matrix {
 
 	public static boolean equals(Matrix... matrices) {
 		if (!checkCompatibility(matrices)) return false;
-		float[][] matrix = matrices[0].matrix;
+		float[] matrix = matrices[0].matrix;
 		for (int i = 1; i < matrices.length; i++)
-			for (int r = 0; r < matrix.length; r++)
-				for (int c = 0; c < matrix.length; c++) if (matrix[r][c] != matrices[i].matrix[r][c]) return false;
+			for (int j = 0; j < matrix.length; j++) if (matrix[j] != matrices[i].matrix[j]) return false;
 		return true;
 	}
 
 	public Matrix add(Matrix m) {
 		if (!checkCompatibility(this, m)) return this;
 		int size = getSize();
-		for (int r = 0; r < size; r++) for (int c = 0; c < size; c++) matrix[r][c] += m.matrix[r][c];
+		for (int r = 0; r < size; r++) for (int c = 0; c < size; c++) matrix[c * size + r] += m.matrix[c * size + r];
 		return this;
 	}
 
@@ -127,21 +129,21 @@ public class Matrix {
 	}
 
 	public Matrix scale(float scalar) {
-		for (int r = 0; r < getSize(); r++) for (int c = 0; c < getSize(); c++) matrix[r][c] *= scalar;
+		for (int i = 0; i < matrix.length; i++) matrix[i] *= scalar;
 		return this;
 	}
 
 	public Matrix multiply(Matrix m) {
 		if (!checkCompatibility(this, m)) return this;
 		int size = getSize();
-		float[][] temp = new float[size][size];
+		float[] temp = new float[size * size];
 		for (int r = 0; r < size; r++) {
-			Vector row = new Vector(matrix[r]);
+			float[] row = new float[size];
+			for (int i = 0; i < size; i++) row[i] = matrix[i * size + r];
 			for (int c = 0; c < size; c++) {
-				float[] colVals = new float[size];
-				for (int i = 0; i < size; i++) colVals[i] = m.matrix[i][c];
-				Vector col = new Vector(colVals);
-				temp[r][c] = Vector.dot(row, col);
+				float[] col = new float[size];
+				for (int i = 0; i < size; i++) col[i] = m.matrix[c * size + i];
+				temp[c * size + r] = Vector.dot(new Vector(row), new Vector(col));
 			}
 		}
 		matrix = temp;
@@ -155,43 +157,47 @@ public class Matrix {
 	public Matrix transpose() {
 		Matrix temp = new Matrix(this);
 		int size = getSize();
-		for (int r = 0; r < size; r++) for (int c = 0; c < size; c++) matrix[r][c] = temp.matrix[c][r];
+		for (int r = 0; r < size; r++) for (int c = 0; c < size; c++) matrix[r * size + c] = temp.matrix[c * size + r];
 		return this;
 	}
 
 	public Matrix setIdentity() {
 		for (int i = 0; i < getSize(); i++) {
 			for (int j = 0; j < getSize(); j++) {
-				if (i == j) matrix[i][j] = 1;
-				else matrix[i][j] = 0;
+				if (i == j) matrix[j * getSize() + i] = 1;
+				else matrix[j * getSize() + i] = 0;
 			}
 		}
 		return this;
 	}
 
 	public int getSize() {
-		return matrix.length;
+		return (int) Math.sqrt(matrix.length);
 	}
 
 	public float get(int r, int c) {
-		return matrix[r][c];
+		return matrix[c * getSize() + r];
 	}
 
 	public void set(int r, int c, float val) {
-		matrix[r][c] = val;
+		matrix[c * getSize() + r] = val;
 	}
 
 	public void toBuffer(FloatBuffer buffer) {
 		int size = getSize();
-		for (int c = 0; c < size; c++) for (int r = 0; r < size; r++) buffer.put(matrix[r][c]);
+		for (int c = 0; c < size; c++) for (int r = 0; r < size; r++) buffer.put(matrix[c * size + r]);
 		buffer.flip();
+	}
+
+	public float[] toArray() {
+		return matrix;
 	}
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (int r = 0; r < getSize(); r++) {
 			String row = "[";
-			for (int c = 0; c < getSize(); c++) row += matrix[c][r] + ", ";
+			for (int c = 0; c < getSize(); c++) row += matrix[c * getSize() + r] + ", ";
 			sb.append(row.substring(0, row.length() - 2) + "]\n");
 		}
 		return sb.substring(0, sb.length() - 1);

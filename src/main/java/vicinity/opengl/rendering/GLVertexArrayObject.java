@@ -3,9 +3,7 @@ package vicinity.opengl.rendering;
 import vicinity.opengl.GLBindable;
 import vicinity.opengl.GLObject;
 
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
-import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
-import static org.lwjgl.opengl.GL11.glDrawElements;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glDeleteVertexArrays;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
@@ -42,6 +40,12 @@ public class GLVertexArrayObject extends GLObject implements GLBindable {
 	public void drawElements() {
 		bind();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		unbind();
+	}
+
+	public void drawArrays() {
+		bind();
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 		unbind();
 	}
 }

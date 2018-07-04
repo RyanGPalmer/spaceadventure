@@ -21,8 +21,12 @@ public final class GLShaderProgram extends GLObject {
 		for (GLShader s : shaders) if (s != null) s.delete();
 	}
 
-	public int getLocation(String attribute) {
+	public int getAttributeLocation(String attribute) {
 		return glGetAttribLocation(id, attribute);
+	}
+
+	public int getUniformLocation(String uniform) {
+		return glGetUniformLocation(id, uniform);
 	}
 
 	public void use() {

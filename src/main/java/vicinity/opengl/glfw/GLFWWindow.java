@@ -12,6 +12,8 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class GLFWWindow {
 	private long id;
+	private int width;
+	private int height;
 	private final int majorVersion;
 	private final int minorVersion;
 
@@ -26,7 +28,9 @@ public class GLFWWindow {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorVersion);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		id = glfwCreateWindow(x, y, title, fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+		width = x;
+		height = y;
+		id = glfwCreateWindow(width, height, title, fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 		if (!isValid()) return false;
 
 		// Get the thread stack and push a new frame
@@ -53,7 +57,17 @@ public class GLFWWindow {
 	}
 
 	public void setSize(int x, int y) {
-		glfwSetWindowSize(id, x, y);
+		width = x;
+		height = y;
+		glfwSetWindowSize(id, width, height);
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 
 	public boolean shouldClose() {
