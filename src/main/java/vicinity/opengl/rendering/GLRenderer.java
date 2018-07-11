@@ -1,7 +1,6 @@
 package vicinity.opengl.rendering;
 
 import vicinity.Log;
-import vicinity.math.Matrix;
 import vicinity.math.Matrix4;
 import vicinity.math.Vector3;
 import vicinity.opengl.buffers.GLVertexBufferObject;
@@ -10,6 +9,9 @@ import vicinity.opengl.shaders.GLShader;
 import vicinity.opengl.shaders.GLShaderException;
 import vicinity.opengl.shaders.GLShaderProgram;
 import vicinity.util.FileUtils;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -28,63 +30,20 @@ public class GLRenderer {
 	private final GLFWWindow window;
 	private final long startTime;
 
+	private static GLRenderer current;
+
 	private GLShaderProgram sp;
 	private GLVertexArrayObject vao;
 	private GLVertexBufferObject vbo;
-
-	private static final float[] vertices = {
-			-0.25f, -0.25f, -0.25f,
-			-0.25f, -0.25f, 0.25f,
-			-0.25f, 0.25f, 0.25f,
-
-			0.25f, 0.25f, -0.25f,
-			-0.25f, -0.25f, -0.25f,
-			-0.25f, 0.25f, -0.25f,
-
-			0.25f, -0.25f, 0.25f,
-			-0.25f, -0.25f, -0.25f,
-			0.25f, -0.25f, -0.25f,
-
-			0.25f, 0.25f, -0.25f,
-			0.25f, -0.25f, -0.25f,
-			-0.25f, -0.25f, -0.25f,
-
-			-0.25f, -0.25f, -0.25f,
-			-0.25f, 0.25f, 0.25f,
-			-0.25f, 0.25f, -0.25f,
-
-			0.25f, -0.25f, 0.25f,
-			-0.25f, -0.25f, 0.25f,
-			-0.25f, -0.25f, -0.25f,
-
-			-0.25f, 0.25f, 0.25f,
-			-0.25f, -0.25f, 0.25f,
-			0.25f, -0.25f, 0.25f,
-
-			0.25f, 0.25f, 0.25f,
-			0.25f, -0.25f, -0.25f,
-			0.25f, 0.25f, -0.25f,
-
-			0.25f, -0.25f, -0.25f,
-			0.25f, 0.25f, 0.25f,
-			0.25f, -0.25f, 0.25f,
-
-			0.25f, 0.25f, 0.25f,
-			0.25f, 0.25f, -0.25f,
-			-0.25f, 0.25f, -0.25f,
-
-			0.25f, 0.25f, 0.25f,
-			-0.25f, 0.25f, -0.25f,
-			-0.25f, 0.25f, 0.25f,
-
-			0.25f, 0.25f, 0.25f,
-			-0.25f, 0.25f, 0.25f,
-			0.25f, -0.25f, 0.25f
-	};
+	private Collection<GLRenderObject> objects = new ArrayList<>();
 
 	public GLRenderer(GLFWWindow window) {
 		this.window = window;
 		startTime = System.currentTimeMillis();
+	}
+
+	public void makeCurrent() {
+		GLRenderer.current = this;
 	}
 
 	public boolean init() {
@@ -96,8 +55,8 @@ public class GLRenderer {
 		vbo = new GLVertexBufferObject();
 		vbo.point(0, 0, 0);
 		vbo.bind();
-		vbo.bufferStatic(vertices);
 
+		makeCurrent();
 		Log.info("Renderer initialized.");
 		vao.unbind();
 		return true;
@@ -138,8 +97,20 @@ public class GLRenderer {
 	}
 
 	public void render() {
-		testStuff();
+		testStuff2();
 		window.swapBuffers();
+	}
+
+	private void testStuff2() {
+		glClearBufferfv(GL_COLOR, 0, BLACK);
+		glClearBufferfi(GL_DEPTH_STENCIL, 0, 1.0f, 0);
+		initProjectionMatrix();
+		for (GLRenderObject obj : objects) {
+			vbo.bufferStatic(obj.getVertices());
+			int mvLoc = sp.getUniformLocation("mv_matrix");
+			glUniformMatrix4fv(mvLoc, false, obj.getModelView());
+			vao.drawArrays();
+		}
 	}
 
 	private void testStuff() {
@@ -170,9 +141,21 @@ public class GLRenderer {
 		}
 	}
 
+	public boolean registerObject(GLRenderObject object) {
+		return objects.add(object);
+	}
+
+	public boolean deregisterObject(GLRenderObject object) {
+		return objects.remove(object);
+	}
+
 	private float getElapsedTimeSeconds() {
 		long elapsedMillis = System.currentTimeMillis() - startTime;
 		return (float) elapsedMillis / 1000f;
+	}
+
+	public static GLRenderer current() {
+		return current;
 	}
 
 	public void close() {
