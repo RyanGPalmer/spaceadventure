@@ -158,6 +158,7 @@
       <words>
         <w>glsl</w>
         <w>shaders</w>
+        <w>vert</w>
         <w>vsync</w>
       </words>
     </dictionary>

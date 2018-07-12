@@ -1,7 +1,8 @@
-package vicinity.opengl.glfw;
+package vicinity.opengl;
 
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
+import vicinity.opengl.GLInput;
 
 import java.nio.IntBuffer;
 
@@ -10,14 +11,14 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-public class GLFWWindow {
+public class GLWindow {
 	private long id;
 	private int width;
 	private int height;
 	private final int majorVersion;
 	private final int minorVersion;
 
-	public GLFWWindow(int majorVersion, int minorVersion) {
+	public GLWindow(int majorVersion, int minorVersion) {
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 	}
@@ -83,9 +84,14 @@ public class GLFWWindow {
 			glfwFreeCallbacks(id);
 			glfwDestroyWindow(id);
 		}
+		int i = GLFW_KEY_W;
 	}
 
 	private final void handleKeyCallback(long window, int key, int scancode, int action, int mods) {
-		if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) glfwSetWindowShouldClose(window, true);
+		GLInput.handleInput(this, key, action);
+	}
+
+	public void close() {
+		glfwSetWindowShouldClose(id, true);
 	}
 }

@@ -1,42 +1,47 @@
 package vicinity.opengl.rendering;
 
+import vicinity.math.Matrix;
 import vicinity.math.Matrix4;
-import vicinity.math.Vector3;
-import vicinity.math.Vector4;
 
 public class GLRenderObject {
 	private final float[] vertices;
-	private Vector3 position;
-	private Vector4 rotation;
-	private Vector3 scale;
+	private Matrix4 translation;
+	private Matrix4 rotation;
+	private Matrix4 scale;
 
 	public GLRenderObject(float[] vertices) {
 		this.vertices = vertices;
-		position = new Vector3(0, 0, 0);
-		rotation = new Vector4(0, 0, 0, 0);
-		scale = new Vector3(1, 1, 1);
+		translation = new Matrix4();
+		rotation = new Matrix4();
+		scale = new Matrix4();
 	}
 
 	public void translate(float x, float y, float z) {
-		position.add(new Vector3(x, y, z));
+		translation.multiply(Matrix4.translate(x, y, z));
 	}
 
-	public void setPosition(float x, float y, float z) {
-		position = new Vector3(x, y, z);
+	public void setTranslation(float x, float y, float z) {
+		translation = Matrix4.translate(x, y, z);
+	}
+
+	public void rotate(float angle, float x, float y, float z) {
+		rotation.multiply(Matrix4.rotate(angle, x, y, z));
 	}
 
 	public void setRotation(float angle, float x, float y, float z) {
-		rotation = new Vector4(x, y, z, angle);
+		rotation = Matrix4.rotate(angle, x, y, z);
 	}
 
-	public void scale(float scale) {
-		this.scale.scale(scale);
+	public void scale(float x, float y, float z) {
+		scale.multiply(Matrix4.scale(x, y, z));
 	}
 
-	public float[] getModelView() {
-		Matrix4 translation = Matrix4.translate(position.getX(), position.getY(), position.getZ());
-		Matrix4 rotation = Matrix4.rotate(this.rotation.getW(), this.rotation.getX(), this.rotation.getY(), this.rotation.getZ());
-		return translation.multiply(rotation).scale(scale.getLength()).toArray();
+	public void setScale(float x, float y, float z) {
+		scale = Matrix4.scale(x, y, z);
+	}
+
+	public Matrix getTransformMatrix() {
+		return Matrix.multiply(translation, rotation).multiply(scale);
 	}
 
 	public float[] getVertices() {

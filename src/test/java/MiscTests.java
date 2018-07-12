@@ -168,7 +168,7 @@ public class MiscTests {
 		Vector j = new Vector(14, 16, 18, 2);
 		Vector k = new Vector(12, 12, 12, 2);
 		Matrix result = new Matrix(h, i, j, k);
-		assertMatrixEquals(result, Matrix.scale(m, 2));
+		assertMatrixEquals(result, Matrix.scaleAll(m, 2));
 
 		h = new Vector(1, 4, 7, 6);
 		i = new Vector(2, 5, 8, 6);

@@ -49,9 +49,9 @@ public class Matrix {
 		return result;
 	}
 
-	public static Matrix scale(Matrix m, float scalar) {
+	public static Matrix scaleAll(Matrix m, float scalar) {
 		Matrix result = new Matrix(m);
-		return result.scale(scalar);
+		return result.scaleAll(scalar);
 	}
 
 	public static Matrix multiply(Matrix m, Matrix n) {
@@ -128,7 +128,7 @@ public class Matrix {
 		return add(m2.negate());
 	}
 
-	public Matrix scale(float scalar) {
+	public Matrix scaleAll(float scalar) {
 		for (int i = 0; i < matrix.length; i++) matrix[i] *= scalar;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class Matrix {
 	}
 
 	public Matrix negate() {
-		return scale(-1);
+		return scaleAll(-1);
 	}
 
 	public Matrix transpose() {

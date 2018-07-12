@@ -4,7 +4,6 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import vicinity.GameSettings;
 import vicinity.Log;
-import vicinity.opengl.glfw.GLFWWindow;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -15,13 +14,13 @@ public class OpenGL {
 	private static final int OPEN_GL_MINOR_VERSION = 3;
 
 	private final GameSettings settings;
-	private final GLFWWindow window;
+	private final GLWindow window;
 	private final String title;
 
 	public OpenGL(GameSettings settings, String title) {
 		this.settings = settings;
 		this.title = title;
-		window = new GLFWWindow(OPEN_GL_MAJOR_VERSION, OPEN_GL_MINOR_VERSION);
+		window = new GLWindow(OPEN_GL_MAJOR_VERSION, OPEN_GL_MINOR_VERSION);
 	}
 
 	public boolean init() {
@@ -68,7 +67,7 @@ public class OpenGL {
 		return settings;
 	}
 
-	public GLFWWindow getWindow() {
+	public GLWindow getWindow() {
 		return window;
 	}
 }

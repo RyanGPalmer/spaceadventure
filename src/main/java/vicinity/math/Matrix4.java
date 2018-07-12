@@ -10,6 +10,10 @@ public class Matrix4 extends Matrix {
 		super(4);
 	}
 
+	public Matrix4(Matrix4 clone) {
+		super(clone);
+	}
+
 	public Matrix4(Vector4 col1, Vector4 col2, Vector4 col3, Vector4 col4) {
 		super(col1, col2, col3, col4);
 	}

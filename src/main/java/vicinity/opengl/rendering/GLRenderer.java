@@ -2,9 +2,8 @@ package vicinity.opengl.rendering;
 
 import vicinity.Log;
 import vicinity.math.Matrix4;
-import vicinity.math.Vector3;
 import vicinity.opengl.buffers.GLVertexBufferObject;
-import vicinity.opengl.glfw.GLFWWindow;
+import vicinity.opengl.GLWindow;
 import vicinity.opengl.shaders.GLShader;
 import vicinity.opengl.shaders.GLShaderException;
 import vicinity.opengl.shaders.GLShaderProgram;
@@ -18,28 +17,27 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.GL_DEPTH_STENCIL;
 import static org.lwjgl.opengl.GL30.glClearBufferfi;
 import static org.lwjgl.opengl.GL30.glClearBufferfv;
-import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
 public class GLRenderer {
 	private static final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
-	private static final Vector3 WHITE = new Vector3(1.0f, 1.0f, 1.0f);
-	private static final Vector3 RED = new Vector3(1.0f, 0.0f, 0.0f);
-	private static final Vector3 GREEN = new Vector3(0.0f, 1.0f, 0.0f);
-	private static final Vector3 BLUE = new Vector3(0.0f, 0.0f, 1.0f);
-
-	private final GLFWWindow window;
-	private final long startTime;
+	private static final boolean DEFAULT_ORTHOGRAPHIC = false;
+	private static final int DEFAULT_FOV = 50;
 
 	private static GLRenderer current;
+	private final GLWindow window;
 
 	private GLShaderProgram sp;
 	private GLVertexArrayObject vao;
 	private GLVertexBufferObject vbo;
 	private Collection<GLRenderObject> objects = new ArrayList<>();
+	private float fov;
+	private boolean orthographic;
+	private GLCamera camera;
 
-	public GLRenderer(GLFWWindow window) {
+	public GLRenderer(GLWindow window) {
 		this.window = window;
-		startTime = System.currentTimeMillis();
+		fov = DEFAULT_FOV;
+		orthographic = DEFAULT_ORTHOGRAPHIC;
 	}
 
 	public void makeCurrent() {
@@ -56,6 +54,7 @@ public class GLRenderer {
 		vbo.point(0, 0, 0);
 		vbo.bind();
 
+		camera = new GLCamera();
 		makeCurrent();
 		Log.info("Renderer initialized.");
 		vao.unbind();
@@ -64,10 +63,9 @@ public class GLRenderer {
 
 	private boolean initShaders() {
 		String vertShaderSrc = FileUtils.read(GLShader.DEFAULT_VERTEX_SHADER_PATH);
-		String geoShaderSrc = FileUtils.read(GLShader.DEFAULT_GEOMETRY_SHADER_PATH);
 		String fragShaderSrc = FileUtils.read(GLShader.DEFAULT_FRAGMENT_SHADER_PATH);
 
-		if (vertShaderSrc == null || geoShaderSrc == null || fragShaderSrc == null) {
+		if (vertShaderSrc == null || fragShaderSrc == null) {
 			Log.error("Failed to load one or more shader source files.");
 			return false;
 		}
@@ -75,10 +73,8 @@ public class GLRenderer {
 		try {
 			sp = new GLShaderProgram();
 			GLShader vertShader = new GLShader(GL_VERTEX_SHADER, vertShaderSrc);
-			GLShader geomShader = new GLShader(GL_GEOMETRY_SHADER, geoShaderSrc);
 			GLShader fragShader = new GLShader(GL_FRAGMENT_SHADER, fragShaderSrc);
 			sp.attachShader(vertShader);
-			//sp.attachShader(geomShader);
 			sp.attachShader(fragShader);
 			sp.linkAndDiscardShaders();
 			sp.use();
@@ -90,7 +86,7 @@ public class GLRenderer {
 	}
 
 	private boolean initProjectionMatrix() {
-		Matrix4 projection = Matrix4.perspective(50, (float) window.getHeight() / window.getHeight(), 0.1f, 1000);
+		Matrix4 projection = orthographic ? new Matrix4() : Matrix4.perspective(fov, (float) window.getHeight() / window.getHeight(), 0.1f, 1000);
 		int pjLoc = sp.getUniformLocation("pj_matrix");
 		glUniformMatrix4fv(pjLoc, false, projection.toArray());
 		return true;
@@ -108,35 +104,8 @@ public class GLRenderer {
 		for (GLRenderObject obj : objects) {
 			vbo.bufferStatic(obj.getVertices());
 			int mvLoc = sp.getUniformLocation("mv_matrix");
-			glUniformMatrix4fv(mvLoc, false, obj.getModelView());
-			vao.drawArrays();
-		}
-	}
-
-	private void testStuff() {
-		float currentTime = getElapsedTimeSeconds();
-		glClearBufferfv(GL_COLOR, 0, BLACK);
-		glClearBufferfi(GL_DEPTH_STENCIL, 0, 1.0f, 0);
-		initProjectionMatrix();
-
-		for (int i = 0; i < 1000; i++) {
-			float f = i + currentTime * 0.3f;
-
-			Matrix4 translation = (Matrix4)
-					Matrix4.translate(0, 0, -4).multiply(
-							Matrix4.translate(
-									(float) Math.sin(2.1 * f) * 0.5f,
-									(float) Math.cos(1.7 * f) * 0.5f,
-									(float) Math.sin(1.3 * f) * (float) Math.cos(1.5 * f) * 2.0f));
-
-			Matrix4 rotation = (Matrix4)
-					Matrix4.rotate(currentTime * 45, 0, 1, 0).multiply(
-							Matrix4.rotate(currentTime * 81, 1, 0, 1));
-
-			Matrix4 modelView = (Matrix4) translation.multiply(rotation);
-
-			int mvLoc = sp.getUniformLocation("mv_matrix");
-			glUniformMatrix4fv(mvLoc, false, modelView.toArray());
+			float[] modelViewMatrix = camera.getViewMatrix().multiply(obj.getTransformMatrix()).toArray();
+			glUniformMatrix4fv(mvLoc, false, modelViewMatrix);
 			vao.drawArrays();
 		}
 	}
@@ -149,13 +118,24 @@ public class GLRenderer {
 		return objects.remove(object);
 	}
 
-	private float getElapsedTimeSeconds() {
-		long elapsedMillis = System.currentTimeMillis() - startTime;
-		return (float) elapsedMillis / 1000f;
-	}
-
 	public static GLRenderer current() {
 		return current;
+	}
+
+	public void setFOV(float fov) {
+		this.fov = fov;
+	}
+
+	public void setOrthographic(boolean orthographic) {
+		this.orthographic = orthographic;
+	}
+
+	public void setCamera(GLCamera camera) {
+		this.camera = camera;
+	}
+
+	public GLCamera getCamera() {
+		return camera;
 	}
 
 	public void close() {
