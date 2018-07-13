@@ -71,6 +71,10 @@ public class GLWindow {
 		return height;
 	}
 
+	public float getAspectRatio() {
+		return (float) width / (float) height;
+	}
+
 	public boolean shouldClose() {
 		return glfwWindowShouldClose(id);
 	}

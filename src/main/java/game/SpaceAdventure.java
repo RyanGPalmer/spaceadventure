@@ -21,12 +21,15 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 	private final float speed = 0.7f;
 	private long startTime;
 
-	private GLCamera camera = new GLCamera();
+	private GLCamera camera;
 
 	private int xMovement = 0;
 	private int yMovement = 0;
 	private int zMovement = 0;
+	private float pitch = 0;
+	private float yaw = 0;
 	private float movementSpeed = 0.1f;
+	private float rotationSpeed = 1f;
 
 	protected SpaceAdventure() {
 		super(TITLE);
@@ -40,6 +43,7 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 	protected final void awake() {
 		GLInput.addListener(this);
 		startTime = System.currentTimeMillis();
+		camera = new GLCamera();
 		GLRenderer.current().setCamera(camera);
 		for (int i = 0; i < cubeCount; i++) {
 			Cube cube = new Cube();
@@ -50,6 +54,7 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 	@Override
 	protected final void tick(final double delta) {
 		camera.translate(movementSpeed * xMovement, movementSpeed * yMovement, movementSpeed * zMovement);
+		camera.rotate(rotationSpeed, pitch, yaw, 0f);
 		super.tick(delta);
 		long elapsed = System.currentTimeMillis() - startTime;
 		float f = elapsed * (0.001f * speed);
@@ -58,7 +63,7 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 			Cube cube = cubes.get(i);
 			float s = (float) Math.sin(f + (float) i / (cubeCount / spread));
 			float c = (float) Math.cos(f + (float) i / (cubeCount / spread));
-			cube.setPosition(s, c, -4 + (i % 2 == 0 ? c : s));
+			cube.setPosition(s, c, (i % 2 == 0 ? c : s));
 			cube.rotate(1f, c, s, 0);
 			cube.scale(1 + s * 0.005f, 1 + c * 0.005f, 1);
 		}
@@ -79,5 +84,13 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 		if (key == GLInput.KEY_SPACE && action == GLInput.RELEASE) yMovement = 0;
 		if (key == GLInput.KEY_LEFT_CTRL && action == GLInput.PRESS) yMovement = 1;
 		if (key == GLInput.KEY_LEFT_CTRL && action == GLInput.RELEASE) yMovement = 0;
+		if (key == GLInput.KEY_UP && action == GLInput.PRESS) pitch = -1;
+		if (key == GLInput.KEY_UP && action == GLInput.RELEASE) pitch = 0;
+		if (key == GLInput.KEY_DOWN && action == GLInput.PRESS) pitch = 1;
+		if (key == GLInput.KEY_DOWN && action == GLInput.RELEASE) pitch = 0;
+		if (key == GLInput.KEY_LEFT && action == GLInput.PRESS) yaw = -1;
+		if (key == GLInput.KEY_LEFT && action == GLInput.RELEASE) yaw = 0;
+		if (key == GLInput.KEY_RIGHT && action == GLInput.PRESS) yaw = 1;
+		if (key == GLInput.KEY_RIGHT && action == GLInput.RELEASE) yaw = 0;
 	}
 }

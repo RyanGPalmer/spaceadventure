@@ -17,6 +17,10 @@ public final class GLInput {
 	public static final int KEY_A = 65;
 	public static final int KEY_S = 83;
 	public static final int KEY_D = 68;
+	public static final int KEY_RIGHT = 262;
+	public static final int KEY_LEFT = 263;
+	public static final int KEY_DOWN = 264;
+	public static final int KEY_UP = 265;
 
 	private static final List<GLInputListener> listeners = new ArrayList<>();
 

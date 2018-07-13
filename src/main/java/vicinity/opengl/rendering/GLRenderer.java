@@ -19,9 +19,6 @@ import static org.lwjgl.opengl.GL30.glClearBufferfi;
 import static org.lwjgl.opengl.GL30.glClearBufferfv;
 
 public class GLRenderer {
-	private static final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
-	private static final boolean DEFAULT_ORTHOGRAPHIC = false;
-	private static final int DEFAULT_FOV = 50;
 
 	private static GLRenderer current;
 	private final GLWindow window;
@@ -30,14 +27,10 @@ public class GLRenderer {
 	private GLVertexArrayObject vao;
 	private GLVertexBufferObject vbo;
 	private Collection<GLRenderObject> objects = new ArrayList<>();
-	private float fov;
-	private boolean orthographic;
 	private GLCamera camera;
 
 	public GLRenderer(GLWindow window) {
 		this.window = window;
-		fov = DEFAULT_FOV;
-		orthographic = DEFAULT_ORTHOGRAPHIC;
 	}
 
 	public void makeCurrent() {
@@ -46,6 +39,7 @@ public class GLRenderer {
 
 	public boolean init() {
 		if (!initShaders()) return false;
+		makeCurrent();
 		glEnable(GL_DEPTH_TEST);
 		vao = new GLVertexArrayObject();
 		vao.bind();
@@ -55,9 +49,8 @@ public class GLRenderer {
 		vbo.bind();
 
 		camera = new GLCamera();
-		makeCurrent();
-		Log.info("Renderer initialized.");
 		vao.unbind();
+		Log.info("Renderer initialized.");
 		return true;
 	}
 
@@ -85,22 +78,16 @@ public class GLRenderer {
 		}
 	}
 
-	private boolean initProjectionMatrix() {
-		Matrix4 projection = orthographic ? new Matrix4() : Matrix4.perspective(fov, (float) window.getHeight() / window.getHeight(), 0.1f, 1000);
-		int pjLoc = sp.getUniformLocation("pj_matrix");
-		glUniformMatrix4fv(pjLoc, false, projection.toArray());
-		return true;
-	}
-
 	public void render() {
 		testStuff2();
 		window.swapBuffers();
 	}
 
 	private void testStuff2() {
-		glClearBufferfv(GL_COLOR, 0, BLACK);
+		glClearBufferfv(GL_COLOR, 0, camera.getBackground());
 		glClearBufferfi(GL_DEPTH_STENCIL, 0, 1.0f, 0);
-		initProjectionMatrix();
+		int pjLoc = sp.getUniformLocation("pj_matrix");
+		glUniformMatrix4fv(pjLoc, false, camera.getProjectionMatrix().toArray());
 		for (GLRenderObject obj : objects) {
 			vbo.bufferStatic(obj.getVertices());
 			int mvLoc = sp.getUniformLocation("mv_matrix");
@@ -122,20 +109,12 @@ public class GLRenderer {
 		return current;
 	}
 
-	public void setFOV(float fov) {
-		this.fov = fov;
-	}
-
-	public void setOrthographic(boolean orthographic) {
-		this.orthographic = orthographic;
-	}
-
 	public void setCamera(GLCamera camera) {
 		this.camera = camera;
 	}
 
-	public GLCamera getCamera() {
-		return camera;
+	public GLWindow getWindow() {
+		return window;
 	}
 
 	public void close() {

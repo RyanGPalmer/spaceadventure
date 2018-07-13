@@ -144,6 +144,7 @@ public class Matrix4 extends Matrix {
 	 */
 	public static Matrix4 rotate(float angle, float x, float y, float z) {
 		Matrix4 rotation = new Matrix4();
+		if (x == 0 && y == 0 && z == 0) return rotation;
 
 		float c = (float) Math.cos(Math.toRadians(angle));
 		float s = (float) Math.sin(Math.toRadians(angle));
