@@ -34,7 +34,7 @@ Use the following instructions to get the project up and running in IntelliJ on 
 2. To launch from *Windows* or *Linux*, run the ***Main*** configuration
 3. To launch from *Mac OS*, run the ***Main (Mac)*** configuration
 
-# Complete Project Refresh (Panic Mode)
+# Complete Project Refresh
 
 1. Clean run configs (Necessary due to bug): `rm -r -f .runConfigurations/`
 2. Reset the local repo: `git reset --hard`
