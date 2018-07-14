@@ -41,6 +41,9 @@ public class GLRenderer {
 		if (!initShaders()) return false;
 		makeCurrent();
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		glPolygonMode(GL_FRONT, GL_FILL);
 		vao = new GLVertexArrayObject();
 		vao.bind();
 

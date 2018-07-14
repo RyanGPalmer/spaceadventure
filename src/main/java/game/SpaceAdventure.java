@@ -16,9 +16,9 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 	private static final String TEXTURE_PATH = "./res/test.jpg";
 
 	private List<Cube> cubes = new ArrayList<>();
-	private final int cubeCount = 15;
+	private final int cubeCount = 1000;
 	private final float spread = 6.2f;
-	private final float speed = 0.7f;
+	private float speed = 0.7f;
 	private long startTime;
 
 	private GLCamera camera;
@@ -71,6 +71,7 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 
 	@Override
 	public final void handleInput(GLWindow window, int key, int action) {
+		// Movement
 		if (key == GLInput.KEY_ESC && action == GLInput.RELEASE) window.close();
 		if (key == GLInput.KEY_W && action == GLInput.PRESS) zMovement = 1;
 		if (key == GLInput.KEY_W && action == GLInput.RELEASE) zMovement = 0;
@@ -84,6 +85,8 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 		if (key == GLInput.KEY_SPACE && action == GLInput.RELEASE) yMovement = 0;
 		if (key == GLInput.KEY_LEFT_CTRL && action == GLInput.PRESS) yMovement = 1;
 		if (key == GLInput.KEY_LEFT_CTRL && action == GLInput.RELEASE) yMovement = 0;
+
+		// Rotation
 		if (key == GLInput.KEY_UP && action == GLInput.PRESS) pitch = -1;
 		if (key == GLInput.KEY_UP && action == GLInput.RELEASE) pitch = 0;
 		if (key == GLInput.KEY_DOWN && action == GLInput.PRESS) pitch = 1;
@@ -92,5 +95,9 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 		if (key == GLInput.KEY_LEFT && action == GLInput.RELEASE) yaw = 0;
 		if (key == GLInput.KEY_RIGHT && action == GLInput.PRESS) yaw = 1;
 		if (key == GLInput.KEY_RIGHT && action == GLInput.RELEASE) yaw = 0;
+
+		// Misc
+		if (key == GLInput.KEY_EQUAL && action == GLInput.PRESS) speed += 0.1f;
+		if (key == GLInput.KEY_MINUS && action == GLInput.PRESS) speed -= 0.1f;
 	}
 }
