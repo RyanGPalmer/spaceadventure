@@ -21,7 +21,7 @@ public abstract class Game {
 		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown, "ShutdownHook"));
 		Log.start();
 		GameSettings settings = new DataSerializer<GameSettings>(SETTINGS_FILE_PATH).load();
-		Log.info(settings != null ? "Settings loaded." : "Settings not loaded. New settings generated.");
+		Log.info(settings != null ? "Settings loaded." : "Settings not loaded. Using default settings.");
 		if (settings == null) settings = GameSettings.getDefault();
 		timer = new TickTimer(settings.tickRate);
 		gl = new OpenGL(settings, title);
