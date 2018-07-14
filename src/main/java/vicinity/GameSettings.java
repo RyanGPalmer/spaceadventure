@@ -7,7 +7,7 @@ public class GameSettings implements Serializable {
 	private static final int DEFAULT_SCREEN_Y = 480;
 	private static final int DEFAULT_QUALITY = 5;
 	private static final int DEFAULT_TICK_RATE = 60;
-	private static final boolean DEFAULT_VSYNC = false;
+	private static final boolean DEFAULT_VSYNC = true;
 	private static final boolean DEFAULT_FULLSCREEN = false;
 
 	public int screenX;

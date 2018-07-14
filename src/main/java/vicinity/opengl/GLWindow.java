@@ -2,7 +2,6 @@ package vicinity.opengl;
 
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
-import vicinity.opengl.GLInput;
 
 import java.nio.IntBuffer;
 

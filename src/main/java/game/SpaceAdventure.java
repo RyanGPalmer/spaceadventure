@@ -16,9 +16,9 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 	private static final String TEXTURE_PATH = "./res/test.jpg";
 
 	private List<Cube> cubes = new ArrayList<>();
-	private final int cubeCount = 1000;
+	private final int cubeCount = 10;
 	private final float spread = 6.2f;
-	private float speed = 0.7f;
+	private float speed = 0.1f;
 	private long startTime;
 
 	private GLCamera camera;
@@ -64,8 +64,8 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 			float s = (float) Math.sin(f + (float) i / (cubeCount / spread));
 			float c = (float) Math.cos(f + (float) i / (cubeCount / spread));
 			cube.setPosition(s, c, (i % 2 == 0 ? c : s));
-			cube.rotate(1f, c, s, 0);
-			cube.scale(1 + s * 0.005f, 1 + c * 0.005f, 1);
+			cube.rotate(speed, c, s, 0);
+			cube.scale(1 + s * (speed * 0.01f), 1 + c * 0.005f * (speed * 0.01f), 1);
 		}
 	}
 
