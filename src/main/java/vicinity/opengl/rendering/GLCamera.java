@@ -1,35 +1,26 @@
 package vicinity.opengl.rendering;
 
-import vicinity.math.Matrix;
 import vicinity.math.Matrix4;
+import vicinity.math.Transform;
 
 public class GLCamera {
 	private static final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
 	private static final boolean DEFAULT_ORTHOGRAPHIC = false;
 	private static final int DEFAULT_FOV = 50;
 
-	private Matrix4 translation;
-	private Matrix4 rotation;
+	public final Transform transform;
+
 	private Matrix4 projection;
 	private final float[] background;
 	private float fov;
 	private boolean orthographic;
 
 	public GLCamera() {
+		transform = new Transform();
 		fov = DEFAULT_FOV;
 		orthographic = DEFAULT_ORTHOGRAPHIC;
 		background = BLACK;
-		translation = new Matrix4();
-		rotation = new Matrix4();
 		updateProjectionMatrix();
-	}
-
-	public void translate(float x, float y, float z) {
-		translation.multiply(Matrix4.translate(x, y, z));
-	}
-
-	public void rotate(float angle, float x, float y, float z) {
-		rotation.multiply(Matrix4.rotate(angle, x, y, z));
 	}
 
 	public Matrix4 getProjectionMatrix() {
@@ -52,9 +43,5 @@ public class GLCamera {
 
 	public float[] getBackground() {
 		return background;
-	}
-
-	public Matrix getViewMatrix() {
-		return Matrix.multiply(translation, rotation);
 	}
 }

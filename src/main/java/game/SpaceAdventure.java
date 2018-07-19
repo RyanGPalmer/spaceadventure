@@ -53,8 +53,8 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 
 	@Override
 	protected final void tick(final double delta) {
-		camera.translate(movementSpeed * xMovement, movementSpeed * yMovement, movementSpeed * zMovement);
-		camera.rotate(rotationSpeed, pitch, yaw, 0f);
+		camera.transform.translate(movementSpeed * xMovement, movementSpeed * yMovement, movementSpeed * zMovement);
+		camera.transform.rotate(rotationSpeed, pitch, yaw, 0f);
 		super.tick(delta);
 		long elapsed = System.currentTimeMillis() - startTime;
 		float f = elapsed * (0.001f * speed);
@@ -63,9 +63,10 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 			Cube cube = cubes.get(i);
 			float s = (float) Math.sin(f + (float) i / (cubeCount / spread));
 			float c = (float) Math.cos(f + (float) i / (cubeCount / spread));
-			cube.setPosition(s, c, (i % 2 == 0 ? c : s));
+			float alt = (i % 2 == 0 ? c : s);
+			cube.setPosition(s, c, alt);
 			cube.rotate(speed, c, s, 0);
-			cube.scale(1 + s * (speed * 0.01f), 1 + c * 0.005f * (speed * 0.01f), 1);
+			cube.scale(1 + (alt * 0.0008f), 1 + (alt * 0.0008f), 1 + (alt * 0.0008f));
 		}
 	}
 

@@ -21,23 +21,23 @@ public abstract class GameObject {
 	}
 
 	public void translate(float x, float y, float z) {
-		model.translate(x, y, z);
+		model.transform.translate(x, y, z);
 	}
 
 	public void rotate(float angle, float x, float y, float z) {
-		model.rotate(angle, x, y, z);
+		model.transform.rotate(angle, x, y, z);
 	}
 
 	public void setPosition(float x, float y, float z) {
-		model.setTranslation(x, y, z);
+		model.transform.setTranslation(x, y, z);
 	}
 
 	public void setRotation(float angle, float x, float y, float z) {
-		model.setRotation(angle, x, y, z);
+		model.transform.setRotation(angle, x, y, z);
 	}
 
 	public void scale(float x, float y, float z) {
-		model.scale(x, y, z);
+		model.transform.scale(x, y, z);
 	}
 
 	public void setModel(GLRenderObject model) {
