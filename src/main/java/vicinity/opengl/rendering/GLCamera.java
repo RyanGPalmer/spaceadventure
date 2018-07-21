@@ -1,14 +1,14 @@
 package vicinity.opengl.rendering;
 
 import vicinity.math.Matrix4;
-import vicinity.math.Transform;
+import vicinity.math.VTransform;
 
 public class GLCamera {
 	private static final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
 	private static final boolean DEFAULT_ORTHOGRAPHIC = false;
 	private static final int DEFAULT_FOV = 50;
 
-	public final Transform transform;
+	public final VTransform transform;
 
 	private Matrix4 projection;
 	private final float[] background;
@@ -16,7 +16,7 @@ public class GLCamera {
 	private boolean orthographic;
 
 	public GLCamera() {
-		transform = new Transform();
+		transform = new VTransform();
 		fov = DEFAULT_FOV;
 		orthographic = DEFAULT_ORTHOGRAPHIC;
 		background = BLACK;

@@ -1,21 +1,127 @@
 package vicinity.math;
 
+import vicinity.Log;
+
 /**
  * This class represents a 4x4-Matrix. GLSL equivalent to mat4.
  *
  * @author Ryan Palmer
  */
-public class Matrix4 extends Matrix {
+public class Matrix4 {
+	private float[] values;
+
 	public Matrix4() {
-		super(4);
+		values = new float[16];
+		setIdentity();
 	}
 
-	public Matrix4(Matrix4 clone) {
-		super(clone);
+	public Matrix4(float[] values) {
+		this.values = new float[16];
+		if (values.length == 16) {
+			System.arraycopy(values, 0, this.values, 0, 16);
+			transpose(); // Convert to column-major
+		} else {
+			Log.error("Tried to initialize a Matrix4 (4 x 4) with " + values.length + " values.", new Exception());
+			setIdentity();
+		}
 	}
 
-	public Matrix4(Vector4 col1, Vector4 col2, Vector4 col3, Vector4 col4) {
-		super(col1, col2, col3, col4);
+	public Matrix4(Matrix4 m) {
+		values = new float[16];
+		System.arraycopy(m.values, 0, values, 0, 16);
+	}
+
+	public static Matrix4 add(Matrix4... matrices) {
+		Matrix4 result = new Matrix4(matrices[0]);
+		for (int i = 1; i < matrices.length; i++) result.add(matrices[i]);
+		return result;
+	}
+
+	public static Matrix4 scale(Matrix4 m, float scalar) {
+		Matrix4 result = new Matrix4(m);
+		return result.scale(scalar);
+	}
+
+	public static Matrix4 multiply(Matrix4 m, Matrix4 n) {
+		Matrix4 result = new Matrix4(m);
+		return result.multiply(n);
+	}
+
+	public static Matrix4 transpose(Matrix4 m) {
+		Matrix4 result = new Matrix4(m);
+		return result.transpose();
+	}
+
+	public Matrix4 add(Matrix4 m) {
+		for (int r = 0; r < 4; r++) for (int c = 0; c < 4; c++) values[c * 4 + r] += m.values[c * 4 + r];
+		return this;
+	}
+
+	public Matrix4 subtract(Matrix4 m) {
+		Matrix4 m2 = new Matrix4(m);
+		return add(m2.negate());
+	}
+
+	public Matrix4 scale(float scalar) {
+		for (int i = 0; i < values.length; i++) values[i] *= scalar;
+		return this;
+	}
+
+	public Matrix4 multiply(Matrix4 m) {
+		float[] temp = new float[16];
+		for (int r = 0; r < 4; r++) {
+			float[] row = new float[4];
+			for (int i = 0; i < 4; i++) row[i] = values[i * 4 + r];
+			for (int c = 0; c < 4; c++) {
+				float[] col = new float[4];
+				for (int i = 0; i < 4; i++) col[i] = m.values[c * 4 + i];
+				temp[c * 4 + r] = Vector4.dot(new Vector4(row), new Vector4(col));
+			}
+		}
+		values = temp;
+		return this;
+	}
+
+	public Matrix4 negate() {
+		return scale(-1);
+	}
+
+	public Matrix4 transpose() {
+		Matrix4 temp = new Matrix4(this);
+		for (int r = 0; r < 4; r++) for (int c = 0; c < 4; c++) values[r * 4 + c] = temp.values[c * 4 + r];
+		return this;
+	}
+
+	public Matrix4 setIdentity() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				if (i == j) values[j * 4 + i] = 1;
+				else values[j * 4 + i] = 0;
+			}
+		}
+		return this;
+	}
+
+	public float get(int r, int c) {
+		return values[c * 4 + r];
+	}
+
+	public void set(int r, int c, float val) {
+		values[c * 4 + r] = val;
+	}
+
+	public float[] toArray() {
+		return values;
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int r = 0; r < 4; r++) {
+			String row = "[";
+			for (int c = 0; c < 4; c++) row += values[c * 4 + r] + ", ";
+			sb.append(row.substring(0, row.length() - 2) + "]\n");
+		}
+		return sb.substring(0, sb.length() - 1);
 	}
 
 	/**
@@ -148,7 +254,7 @@ public class Matrix4 extends Matrix {
 
 		float c = (float) Math.cos(Math.toRadians(angle));
 		float s = (float) Math.sin(Math.toRadians(angle));
-		Vector3 vec = new Vector3(x, y, z);
+		Vector3 vec = new Vector3(new float[]{x, y, z});
 		if (vec.getLength() != 1f) {
 			vec.normalize();
 			x = vec.getX();
@@ -186,5 +292,29 @@ public class Matrix4 extends Matrix {
 		scaling.set(2, 2, z);
 
 		return scaling;
+	}
+
+	public static Matrix4 lookAt(Vector3 position, Vector3 target) {
+		Matrix4 orientation = new Matrix4();
+		Matrix4 offset = new Matrix4();
+		Vector3 direction = Vector3.getNormalized(Vector3.subtract(target, position));
+		Vector3 right = Vector3.getNormalized(Vector3.cross(Vector.UP, direction));
+		Vector3 up = Vector3.cross(direction, right);
+
+		orientation.set(0, 0, right.getX());
+		orientation.set(0, 1, right.getY());
+		orientation.set(0, 2, right.getZ());
+		orientation.set(1, 0, up.getX());
+		orientation.set(1, 1, up.getY());
+		orientation.set(1, 2, up.getZ());
+		orientation.set(2, 0, direction.getX());
+		orientation.set(2, 1, direction.getY());
+		orientation.set(2, 2, direction.getZ());
+
+		offset.set(0, 3, position.getX());
+		offset.set(1, 3, position.getY());
+		offset.set(2, 3, position.getZ());
+
+		return Matrix4.multiply(orientation, offset);
 	}
 }

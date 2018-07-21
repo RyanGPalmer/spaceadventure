@@ -2,6 +2,8 @@ package game;
 
 import vicinity.Cube;
 import vicinity.Game;
+import vicinity.math.Matrix4;
+import vicinity.math.Vector3;
 import vicinity.opengl.GLInput;
 import vicinity.opengl.GLInputListener;
 import vicinity.opengl.GLWindow;
@@ -44,6 +46,7 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 		GLInput.addListener(this);
 		startTime = System.currentTimeMillis();
 		camera = new GLCamera();
+		camera.transform.setPosition(0, 0, -5);
 		GLRenderer.current().setCamera(camera);
 		for (int i = 0; i < cubeCount; i++) {
 			Cube cube = new Cube();
@@ -54,7 +57,6 @@ public final class SpaceAdventure extends Game implements GLInputListener {
 	@Override
 	protected final void tick(final double delta) {
 		camera.transform.translate(movementSpeed * xMovement, movementSpeed * yMovement, movementSpeed * zMovement);
-		camera.transform.rotate(rotationSpeed, pitch, yaw, 0f);
 		super.tick(delta);
 		long elapsed = System.currentTimeMillis() - startTime;
 		float f = elapsed * (0.001f * speed);

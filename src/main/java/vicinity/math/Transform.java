@@ -47,11 +47,11 @@ public class Transform {
 		return scale;
 	}
 
-	public Matrix getTransformationMatrix() {
-		return Matrix.multiply(translation, rotation).multiply(scale);
+	public Matrix4 getTransformationMatrix() {
+		return Matrix4.multiply(translation, rotation).multiply(scale);
 	}
 
-	public Matrix getViewMatrix() {
-		return Matrix.multiply(rotation, translation);
+	public Matrix4 getViewMatrix() {
+		return Matrix4.multiply(rotation, translation);
 	}
 }

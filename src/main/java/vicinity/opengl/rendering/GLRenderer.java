@@ -94,7 +94,8 @@ public class GLRenderer {
 		for (GLRenderObject obj : objects) {
 			vbo.bufferStatic(obj.getVertices());
 			int mvLoc = sp.getUniformLocation("mv_matrix");
-			float[] modelViewMatrix = camera.transform.getViewMatrix().multiply(obj.transform.getTransformationMatrix()).toArray();
+			float[] modelViewMatrix = camera.transform.getLookAtMatrix().multiply(obj.transform.getTransformationMatrix()).toArray();
+			//float[] modelViewMatrix = obj.transform.getTransformationMatrix().toArray();
 			glUniformMatrix4fv(mvLoc, false, modelViewMatrix);
 			vao.drawArrays();
 		}
